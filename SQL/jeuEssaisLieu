@@ -1,0 +1,4 @@
+INSERT INTO lieu (nom, rue, ville_id) VALUES ("Le chat noir", "13 All Duguay Trouin", 1);
+INSERT INTO lieu (nom, rue, ville_id) VALUES ("OK quais bar", "2 Rue de Pont l'Abbé", 2);
+INSERT INTO lieu (nom, rue, ville_id) VALUES ("BowlCenter : Bowling", "24 Rue de l'église", 3);
+INSERT INTO lieu (nom, rue, ville_id) VALUES ("Patinoire", "2 Rue de l'Olympe", 4);

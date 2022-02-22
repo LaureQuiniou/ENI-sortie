@@ -1,0 +1,5 @@
+Insert Into participant (campus_id,email,password,nom,prenom,telephone,actif,pseudo) values ( 1, "admin@admin.fr","admin123","admin","adminou","123456789",true,"admin1");
+Insert Into participant (campus_id,email,password,nom,prenom,telephone,actif,pseudo) values ( 2, "user@user.fr","user123","user","userinou","123456789",true,"user1");
+Insert Into participant (campus_id,email,password,nom,prenom,telephone,actif,pseudo) values ( 3, "user2@user.fr","user123","user2","userinou2","123456789",true,"user2");
+Insert Into participant (campus_id,email,password,nom,prenom,telephone,actif,pseudo) values ( 1, "organisateur@organisateur.fr","organisateur123","organisateur","organisateurinou","123456789",true,"organisateur1");
+Insert Into participant (campus_id,email,password,nom,prenom,telephone,actif,pseudo) values ( 2, "participant@participant.fr","participant123","participant","participinou","123456789",true,"participant1");

@@ -1,0 +1,4 @@
+INSERT INTO ville (code_postal, nom) VALUES (29000, "QUIMPER");
+INSERT INTO ville (code_postal, nom) VALUES (44162, "SAINT-HERBLAIN");
+INSERT INTO ville (code_postal, nom) VALUES (85000, "LA-ROCHE-SUR-YON");
+INSERT INTO ville (code_postal, nom) VALUES (44000, "NANTES");

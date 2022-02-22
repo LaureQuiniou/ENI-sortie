@@ -1,0 +1,6 @@
+INSERT INTO etat (libelle) VALUES ('Créee');
+INSERT INTO etat (libelle) VALUES ('Ouverte');
+INSERT INTO etat (libelle) VALUES ('Clôturée');
+INSERT INTO etat (libelle) VALUES ('Activité en cours');
+INSERT INTO etat (libelle) VALUES ('Passée');
+INSERT INTO etat (libelle) VALUES ('Annulée');

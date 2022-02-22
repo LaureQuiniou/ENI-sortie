@@ -13,7 +13,40 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
+
     <body>
-        {% block body %}{% endblock %}
+        <header>
+            <div>
+                <!--NAV.BARRE ET TITRE -->
+                <h1> <a href="#"><img src="{{ asset('image/logo.png') }}" alt="Logo"></a> Sortir.com</h1>
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ path('') }}">Active</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href=""{{ path('') }}"">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href=""{{ path('') }}"">Mon profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href=""{{ path('') }}"">Se déconnecter</a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <main>
+            <div class="container">
+            {% block body %}{% endblock %}
+            </div>
+        </main>
+
+        <footer>
+            <div class="container">
+                <p>&copy {{ "now" |date('Y') }} Sortir avec l'ENI </p>
+            </div>
+
+        </footer>
     </body>
 </html>
