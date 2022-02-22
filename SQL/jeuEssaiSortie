@@ -1,0 +1,14 @@
+INSERT INTO sortie (campus_id, date_heure_debut, date_limite_inscription, duree, etat_id, infos_sortie, lieu_id, nb_inscriptions_max, nom, organisateur_id)
+VALUES (1, '2022-02-24 19:00:00', '2022-02-23 19:00:00','02:00:00', 8, "Rendez-vous à 19h au ok quais bar. Pour ceux qui le souhaite nous pourrons ensuite allez manger ensemble :)!",2,10, "Allez boire un verre",4);
+
+INSERT INTO sortie (campus_id, date_heure_debut, date_limite_inscription, duree, etat_id, infos_sortie, lieu_id, nb_inscriptions_max, nom, organisateur_id)
+VALUES (2, '2022-03-01 12:00:00', '2022-02-28 22:00:00','02:00:00', 8, "Un petit resto pour faire connaissance! Les anciens et les nouveaux de l'ENI sont les bienvenus!",3,6, "Un resto ca vous dit? ",2);
+
+INSERT INTO sortie (campus_id, date_heure_debut, date_limite_inscription, duree, etat_id, infos_sortie, lieu_id, nb_inscriptions_max, nom, organisateur_id)
+VALUES (4, '2022-02-26 14:00:00', '2022-02-25 22:00:00','04:00:00', 8, "Glissade à la patinoire de la Roche sur Yon. Rendez-vous à 14h devant la patinoire!",4,15, "Rencontre à la patinoire de la Roche",1);
+
+INSERT INTO sortie (campus_id, date_heure_debut, date_limite_inscription, duree, etat_id, infos_sortie, lieu_id, nb_inscriptions_max, nom, organisateur_id)
+VALUES (1, '2022-03-05 19:00:00', '2022-03-04 19:00:00','02:00:00', 8, "Rendez-vous à 19h au ok quais bar. Comme la dernière fois un resto est prévu pour ceux qui le souhaiteront!",2,10, "Rencontre au OK Quais Bar",4);
+
+INSERT INTO sortie (campus_id, date_heure_debut, date_limite_inscription, duree, etat_id, infos_sortie, lieu_id, nb_inscriptions_max, nom, organisateur_id)
+VALUES (2, '2022-02-27 15:00:00', '2022-02-26 22:00:00','04:00:00', 8, "Pour les fan de Bowling ou juste pour rencontrer les élèves de l'ENI ! ",3,15, "Bowling ! ",4);

@@ -1,0 +1,4 @@
+INSERT INTO campus (nom) values ( "Quimper");
+INSERT INTO campus (nom) values ( "Saint-Herblain");
+INSERT INTO campus (nom) values ( "Chartres-de-Bretagne");
+INSERT INTO campus (nom) values ( "La Roche-Sur-Yon");
