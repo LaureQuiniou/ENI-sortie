@@ -4,15 +4,15 @@
 /*FLEXBOX */
 body {
     font-family: 'Poppins', serif;
+    color: black;
     background-size: cover;
     background-attachment: fixed;
-    color: #EEE;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 .container{
-    max-width: 800px;
+    max-width: 1200px;
     margin: auto;
 }
 main {
@@ -86,6 +86,7 @@ form{
 
 form label{
     padding-top: 15px;
+    display: block;
 }
 
 form button{
@@ -93,3 +94,6 @@ form button{
     align-self: center;
 }
 
+.btn-primary{
+    background-color: #219F94;
+}
