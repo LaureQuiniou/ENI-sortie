@@ -12,7 +12,8 @@
             <p>Email : {{ app.user.email }}</p>
             <p>Campus :</p>
         </div>
-        <button class="btn-primary">Retour</button> <button class="btn-primary">Modifier</button>
+        <button class="btn-primary">Retour</button>
+        <a href="{{ path('profil_modifier') }}"><button class="btn-primary">Modifier</button></a>
     </section>
 
 {% endblock %}
