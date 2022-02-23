@@ -6,7 +6,11 @@
 
 {% block body %}
     <h1>Coucou c'est moi !!!</h1>
-    {{ form(sortieForm) }}
+    {{ form_start(sortieForm) }}
+        {{ form_label(sortieForm.nom) }}
+        {{ form_widget(sortieForm.nom) }}
+        {{ form_errors(sortieForm.nom) }}
+    {{ form_end(sortieForm) }}
 {% endblock %}
 
 

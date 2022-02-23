@@ -40,6 +40,11 @@ class Ville
         $this->lieux = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return $this->codePostal .' '. $this->nom;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
