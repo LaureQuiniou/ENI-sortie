@@ -23,13 +23,13 @@
                 {% for s in sorties %}
                 <tr>
                     <td>{{ s.nom }}</td>
-                    <td>{{ s.date_heure_debut | date('Y') }}</td>
-                    <td>{{ s.date_limite_inscription | date('Y') }}</td>
-                    <td>{{ s.nb_inscription_max }}</td>
-                    <td>{{ s.etat_id }}</td>
-                    <td>...A revoir...</td>
+                    <td>{{ s.dateHeureDebut | date('Y') }}</td>
+                    <td>{{ s.dateLimiteInscription | date('Y') }}</td>
+                    <td>{{ s.nbInscriptionsMax }}</td>
+                    <td>{{ s.etat }}</td>
+                    <td>...A continuer...</td>
                     <td>{{organisateur_id}}</td>
-                    <td>...Action...</td>
+                    <td>...Action A continuer...</td>
                 </tr>
                 {% endfor %}
                 </tbody>
