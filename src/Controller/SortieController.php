@@ -17,7 +17,7 @@ class SortieController extends AbstractController
     /**
      * @Route("/sortie", name="sortie_afficher")
      */
-    public function afficher(SortieRepository $sortieRepository): Response
+    public function afficherTableau(SortieRepository $sortieRepository): Response
     {
         $sorties=$sortieRepository->findAll();
         return $this->render('sortie/afficher.html.twig', [
