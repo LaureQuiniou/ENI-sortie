@@ -19,7 +19,7 @@ class SortieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', TextType::class,['attr' => ['class' => 'form-control']])
+            ->add('nom', TextType::class,['attr' =>['class' => 'form-control']])
             ->add('dateHeureDebut', DateTimeType::class,['html5'=>true, 'widget'=>'single_text','attr' => ['class' => 'form-control']])
             ->add('dateLimiteInscription',DateType::class,['html5'=>true, 'widget'=>'single_text', 'attr' => ['class' => 'form-control']])
             ->add('duree', TimeType::class, ['html5'=>true, 'widget'=>'single_text', 'attr' => ['class' => 'form-control']])
