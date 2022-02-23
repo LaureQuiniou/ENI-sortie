@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Profil
+{% endblock %}
+
+{% block body %}
+    <form>
+        <h2>Mon profil</h2>
+        <div>
+            <label>Pseudo : </label>
+            <input value="{{ app.user.pseudo }}" type="text">
+        </div>
+        <div>
+            <label>Prénom : </label>
+            <input value="{{ app.user.prenom }}" type="text">
+        </div>
+        <div>
+            <label>Téléphone : </label>
+            <input value="{{ app.user.telephone }}" type="text">
+        </div>
+        <div>
+            <label>Email : </label>
+            <input value="{{ app.user.email }}" type="text">
+        </div>
+        <div>
+            <label>Mot de passe : </label>
+            <input type="password">
+        </div>
+        <div>
+            <label>Confirmation mot de passe : </label>
+            <input type="password">
+        </div>
+        <div>
+            <label>Campus : </label>
+        </div>
+        <div>
+            <label>Ma photo : </label>
+            <input type="file">
+        </div>
+        <button type="submit" class="btn-primary">Enregistrer</button>
+        <button type="reset" class="btn-primary">Annuler</button>
+    </form>
+{% endblock %}
