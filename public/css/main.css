@@ -18,7 +18,7 @@ body {
 main {
     flex: 1;
     padding-top: 25px;
-    background-color: #F2F5C8;
+    background-color: #ffffff;
 }
 
 h1, h2, h3, h4, p, a, ul, li{
@@ -32,17 +32,18 @@ header{
     background-color: #219F94;
 }
 
-header a{
-    color:white;
-}
 
 header a:visited{
     color:white;
 }
 
+.nav > li > a:hover{
+    color:black;
+}
+
 .nav > li > a{
     font-size :20px;
-    color:black;
+    color:white;
 
 }
 
@@ -96,4 +97,9 @@ form button{
 
 .btn-primary{
     background-color: #219F94;
+    border-color: #219F94;
+}
+
+.btn-primary:hover{
+    background-color: #075951;
 }
