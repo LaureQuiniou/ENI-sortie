@@ -4,29 +4,26 @@
 /*FLEXBOX */
 body {
     font-family: 'Poppins', serif;
+    color: black;
     background-size: cover;
     background-attachment: fixed;
-    color: #EEE;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
-
 .container{
-    max-width: 800px;
+    max-width: 1200px;
     margin: auto;
 }
-
-
 main {
     flex: 1;
     padding-top: 25px;
+    background-color: #ffffff;
 }
 
 h1, h2, h3, h4, p, a, ul, li{
     font-family: 'Poppins', sans-serif;
 }
-
 header img {
     width : 170px;
     padding: 5px 20px 5px;
@@ -35,16 +32,22 @@ header{
     background-color: #219F94;
 }
 
-header a{
-    color:white;
-}
 
 header a:visited{
     color:white;
 }
 
+.nav > li > a:hover{
+    color:black;
+}
+
 .nav > li > a{
     font-size :20px;
+
+
+    color:white;
+
+
 }
 
 .nav{
@@ -87,6 +90,7 @@ form{
 
 form label{
     padding-top: 15px;
+    display: block;
 }
 
 form button{
@@ -110,3 +114,11 @@ tbody{
 }
 
 
+.btn-primary{
+    background-color: #219F94;
+    border-color: #219F94;
+}
+
+.btn-primary:hover{
+    background-color: #075951;
+}
