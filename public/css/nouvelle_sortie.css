@@ -1,1 +1,9 @@
 /* Aurélie: css pour page création d'une sortie */
+
+textarea{
+    height: 130px;
+}
+
+.form-control{
+    width: 440px;
+}
