@@ -85,7 +85,7 @@ form label{
     display: block;
 }
 
-form button{
+button{
     min-width: 150px;
     align-self: center;
 }
