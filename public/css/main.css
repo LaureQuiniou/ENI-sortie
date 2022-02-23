@@ -45,7 +45,6 @@ header a:visited{
 
 .nav > li > a{
     font-size :20px;
-
 }
 
 .nav{
@@ -94,4 +93,20 @@ form button{
     min-width: 150px;
     align-self: center;
 }
+table {
+    border-width:1px;
+    border-style:solid;
+    border-color:black;
+    width:100%;
+}
+thead,tfoot {
+    background-color: #171B45;
+    color: white;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+tbody{
+    font-size: 20px;
+}
+
 

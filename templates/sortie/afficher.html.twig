@@ -1,8 +1,43 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Coucou c'est moi !!!</h1>
+    <div>
+        <h2>Filtrer les sorties</h2>
+    </div>
+    <div class="FlexSorties">
+            <table>
+                <thead>
+                <tr>
+                    <td>Nom de la sortie</td>
+                    <td>Date de la sortie</td>
+                    <td>Clôture</td>
+                    <td>Inscrits/places</td>
+                    <td>Etat</td>
+                    <td>Inscrit</td>
+                    <td>Organisateur</td>
+                    <td>Actions</td>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for s in sorties %}
+                <tr>
+                    <td>{{ s.nom }}</td>
+                    <td>{{ s.date_heure_debut | date('Y') }}</td>
+                    <td>{{ s.date_limite_inscription | date('Y') }}</td>
+                    <td>{{ s.nb_inscription_max }}</td>
+                    <td>{{ s.etat_id }}</td>
+                    <td>...A revoir...</td>
+                    <td>{{organisateur_id}}</td>
+                    <td>...Action...</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+    </div>
+
 {% endblock %}
+
 
 {% block title %}
     Sortie | {{ parent() }}
