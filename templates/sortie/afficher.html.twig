@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="FlexInfoDateUser">
+        <p>Date du jour : {{ "now" |date('d/M/Y') }}</p>
+    </div>
+    <div class="FlexInfoDateUser">
+        <p>Participant : {{ app.user.nom }}</p>
+    </div>
     <div>
         <h2>Filtrer les sorties</h2>
     </div>
