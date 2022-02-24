@@ -71,7 +71,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private $pseudo;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Sortie::class)
+     * @ORM\ManyToMany(targetEntity=Sortie::class, mappedBy="participants", cascade={"persist"})
      */
     private $sorties;
 
