@@ -30,21 +30,21 @@
                     <td>...A continuer...</td>
                     <td>{{s.organisateur.nom}}</td>
                     <td>
-                        <a href="{{ path('/') }}">Afficher</a>
+                        <a href="{{ path('sortie_afficher') }}">Afficher</a>
 
                         {% if s.etat.libelle is same as("Ouverte") %}
-                            <a href="{{ path('/') }}">S'inscrire</a>
+                            <a href="{{ path('sortie_afficher') }}">S'inscrire</a>
                         {% endif %}
 
-                        <a href="{{ path('/') }}">Se désister</a>
+                        <a href="{{ path('sortie_afficher') }}">Se désister</a>
 
                         {% if app.user.id is same as(s.organisateur.id) %}
                             {% if s.etat.libelle is same as("En création") %}
-                                 <a href="{{ path('/') }}">Publier</a>
-                                <a href="{{ path('/') }}">Modifier</a>
+                                 <a href="{{ path('sortie_afficher') }}">Publier</a>
+                                <a href="{{ path('sortie_afficher') }}">Modifier</a>
                             {% endif %}
                             {% if s.etat.libelle is same as("Ouverte") %}
-                                <a href="{{ path('/') }}">Annuler</a>
+                                <a href="{{ path('sortie_afficher') }}">Annuler</a>
                             {% endif %}
                         {% endif %}
                     </td>
