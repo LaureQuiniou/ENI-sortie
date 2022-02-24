@@ -104,7 +104,12 @@ thead,tfoot {
 tbody{
     font-size: 20px;
 }
-
+table, th, td {
+    border: 1px solid;
+    table-layout: auto;
+    table-layout: fixed;
+    text-align :center;
+}
 
 .btn-primary{
     background-color: #219F94;
