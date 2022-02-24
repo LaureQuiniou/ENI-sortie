@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\SortieType;
+use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use App\Repository\WishRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -47,12 +48,14 @@ class SortieController extends AbstractController
         ]);
     }
     /**
-     * @Route("/inscription/{$id}", name="sortie_inscription")
+     * @Route("/inscription/{id}", name="sortie_inscription", methods={"GET"})
      */
-    public function inscriptionSortie(int $id, EntityManagerInterface $entityManager, SortieRepository $sortieRepository): Response
+    public function inscriptionSortie(int $id, EntityManagerInterface $entityManager, SortieRepository $sortieRepository, ParticipantRepository $participantRepository): Response
     {
         $sortieEnCours=$sortieRepository->find($id); // Trouver la sortie actuelle en cherchant son id
-        $participant=$this->getUser();
+        $participant=new Participant();
+        $participant=$participantRepository->findOneBy(['email'=>$this->getUser()->getUserIdentifier()]);
+        dump($sortieEnCours);
         $sortieEnCours->addParticipant($participant); //trouver le user actuel -> ajouter le participant à la sortie
 
         //sauvegarde en BDD
