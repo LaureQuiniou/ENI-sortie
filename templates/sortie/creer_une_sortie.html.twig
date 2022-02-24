@@ -30,7 +30,7 @@
         {{ form_widget(sortieForm.infosSortie) }}
         {{ form_errors(sortieForm.infosSortie) }}
         {{ form_label(sortieForm.lieu.ville) }}
-        {{ form_widget(sortieForm.lieu.ville) }}
+        {{ form_widget(sortieForm.lieu.ville|sort) }}
         {{ form_errors(sortieForm.lieu.ville) }}
         {{ form_label(sortieForm.lieu.nom) }}
         {{ form_widget(sortieForm.lieu.nom) }}

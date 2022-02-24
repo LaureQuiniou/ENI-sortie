@@ -26,21 +26,22 @@ class ProfilController extends AbstractController
     /**
      * @Route("/profil/modifier", name="profil_modifier")
      */
-    public function ModifierProfil(Request $request, EntityManagerInterface $entityManager): Response
+    public function ModifierProfil(Request $request, EntityManagerInterface $entityManager, ParticipantRepository $participantRepository): Response
     {
-        $participant=$this->getUser();
+        $participant = $this->getUser();
         $profilForm = $this->createForm(ProfilType::class, $participant);
-       $profilForm->handleRequest($request);
+        $profilForm->handleRequest($request);
 
             if($profilForm->isSubmitted() && $profilForm->isValid()){
-                $participant = $profilForm->getData();
 
-                if(!$profilForm->get('newPassword')->getData()){
-
+                // vérification si mot de passe est à changer (si champs newPassword pas null et pas vide)
+                if(!$request->request->get('newPassword') && $request->request->get('newPassword')!=''){
+                    $participant->setPassword($request->request->get('newPassword'));
                 }
 
                 $entityManager->persist($participant);
                 $entityManager->flush();
+                $this->addFlash('success','Youpi !!!!!!');
                 return $this->redirectToRoute('profil');
             }
 
