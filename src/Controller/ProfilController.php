@@ -30,13 +30,13 @@ class ProfilController extends AbstractController
     {
         $participant = new Participant();
         $profilForm = $this->createForm(ProfilType::class, $participant);
-       /* $profilForm->handleRequest($request);
+       $profilForm->handleRequest($request);
 
             if($profilForm->isSubmitted() && $profilForm->isValid()){
                 $entityManager->persist($participant);
                 $entityManager->flush();
                 return $this->redirectToRoute('/profil');
-            }*/
+            }
 
       return $this->render('profil/modifierProfil.html.twig',[
           'profilForm' => $profilForm->createView()

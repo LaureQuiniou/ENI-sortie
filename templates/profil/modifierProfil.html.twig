@@ -5,40 +5,21 @@
 {% endblock %}
 
 {% block body %}
-    <form>
-        <h2>Mon profil</h2>
-        <div>
-            <label>Pseudo : </label>
-            <input value="{{ app.user.pseudo }}" type="text">
-        </div>
-        <div>
-            <label>Prénom : </label>
-            <input value="{{ app.user.prenom }}" type="text">
-        </div>
-        <div>
-            <label>Téléphone : </label>
-            <input value="{{ app.user.telephone }}" type="text">
-        </div>
-        <div>
-            <label>Email : </label>
-            <input value="{{ app.user.email }}" type="text">
-        </div>
-        <div>
-            <label>Mot de passe : </label>
-            <input type="password">
-        </div>
-        <div>
-            <label>Confirmation mot de passe : </label>
-            <input type="password">
-        </div>
-        <div>
-            <label>Campus : </label>
-        </div>
-        <div>
-            <label>Ma photo : </label>
-            <input type="file">
-        </div>
-        <button type="submit" class="btn-primary">Enregistrer</button>
-        <button type="reset" class="btn-primary">Annuler</button>
-    </form>
+
+    {{ form_start(profilForm) }}
+
+    {{ form_row(profilForm.pseudo, {'value': app.user.pseudo}) }}
+    {{ form_row(profilForm.prenom, {'value': app.user.prenom}) }}
+    {{ form_row(profilForm.nom, {'value': app.user.nom}) }}
+    {{ form_row(profilForm.telephone, {'value': app.user.telephone}) }}
+    {{ form_row(profilForm.email, {'value': app.user.email}) }}
+    {{ form_row(profilForm.password) }}
+    {{ form_widget(profilForm) }}
+
+    <div>
+        <button type="submit" class=" btn btn-lg btn-primary">Enregistrer</button>
+        <button type="reset" class="btn btn-lg btn-primary">Annuler</button>
+    </div>
+    {{ form_end(profilForm) }}
+
 {% endblock %}
