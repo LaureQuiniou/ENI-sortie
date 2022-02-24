@@ -67,7 +67,11 @@ footer p{
 }
 
 .flash-success{
-    background-color: forestgreen;
+    background-color: #15ccba;
+}
+
+.flash-error{
+    background-color: #fdc29b;
 }
 
 form{

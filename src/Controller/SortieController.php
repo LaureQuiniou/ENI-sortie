@@ -3,8 +3,14 @@
 namespace App\Controller;
 
 
+use App\Entity\Etat;
+use App\Entity\Lieu;
+use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\SortieType;
+use App\Repository\EtatRepository;
+use App\Repository\LieuRepository;
+use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,14 +34,20 @@ class SortieController extends AbstractController
     /**
      * @Route("/cree_une_sortie", name="sortie_creer")
      */
-    public function creerSortie(Request $request, EntityManagerInterface $entityManager): Response
+    public function creerSortie(Request $request, EntityManagerInterface $entityManager, EtatRepository $etatRepository, LieuRepository $lieuRepository, ParticipantRepository $participantRepository): Response
     {
         $sortie = new Sortie();
+        $organisateur = $participantRepository->findOneBy(['email'=>$this->getUser()->getUserIdentifier()]);
         $sortieForm = $this->createForm(SortieType::class, $sortie);
-
         $sortieForm->handleRequest($request);
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
+            $lieu = $lieuRepository->findOneBy(['nom'=>'Le chat Noir']);
+            $sortie->setCampus($this->getUser()->getCampus());
+            $sortie->setOrganisateur($organisateur);
+            $etat = $etatRepository->findOneBy(['libelle'=>'ouverte']);
+            $sortie->setEtat($etat);
+            $sortie->setLieu($lieu);
             $entityManager->persist($sortie);
             $entityManager->flush();
         }
