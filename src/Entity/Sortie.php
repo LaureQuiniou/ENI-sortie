@@ -74,7 +74,7 @@ class Sortie
     private $organisateur;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Participant::class)
+     * @ORM\ManyToMany(targetEntity=Participant::class, inversedBy="sorties", cascade={"persist"})
      */
     private $participants;
 

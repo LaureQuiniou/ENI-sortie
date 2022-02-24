@@ -158,6 +158,9 @@ class AppFixtures extends Fixture
         $sortie1->setOrganisateur($user3);
         $sortie1->setEtat($ouverte);
         $sortie1->setNbInscriptionsMax(10);
+        $sortie1->addParticipant($user2);
+        $sortie1->addParticipant($user1);
+        $sortie1->addParticipant($user4);
 
         $sortie2->setCampus($stHerblain);
         $sortie2->setNom('Un resto ca vous dit?');
@@ -169,6 +172,7 @@ class AppFixtures extends Fixture
         $sortie2->setOrganisateur($user2);
         $sortie2->setEtat($ouverte);
         $sortie2->setNbInscriptionsMax(6);
+        $sortie2->addParticipant($user3);
 
         $sortie3->setCampus($chartres);
         $sortie3->setNom('Rencontre à la patinoire de la Roche');
@@ -180,6 +184,8 @@ class AppFixtures extends Fixture
         $sortie3->setOrganisateur($user2);
         $sortie3->setEtat($ouverte);
         $sortie3->setNbInscriptionsMax(15);
+        $sortie3->addParticipant($user1);
+        $sortie3->addParticipant($user4);
 
         $sortie4->setCampus($roche);
         $sortie4->setNom('Rencontre au OK Quais Bar');
@@ -202,6 +208,9 @@ class AppFixtures extends Fixture
         $sortie5->setOrganisateur($user1);
         $sortie5->setEtat($ouverte);
         $sortie5->setNbInscriptionsMax(18);
+        $sortie5->addParticipant($user2);
+        $sortie5->addParticipant($user3);
+        $sortie5->addParticipant($user4);
 
         $manager->persist($sortie1);
         $manager->persist($sortie2);
