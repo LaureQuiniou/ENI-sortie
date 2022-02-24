@@ -34,7 +34,8 @@ class ProfilType extends AbstractType
             ->add('email', TextType::class, [
                 'required' => false
             ])
-            ->add('password', RepeatedType::class, [
+            ->add('newPassword', RepeatedType::class, [
+                'mapped'=>false,
                 'required' => false,
                 'type' => PasswordType::class,
                 'invalid_message' => 'Passwords do not match.',
