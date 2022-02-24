@@ -8,6 +8,7 @@ use phpDocumentor\Reflection\PseudoType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -33,16 +34,12 @@ class ProfilType extends AbstractType
             ->add('email', TextType::class, [
                 'required' => false
             ])
-            ->add('password', PasswordType::class, [
+            ->add('password', RepeatedType::class, [
                 'required' => false,
-                'constraints' => [
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
-                ]
+                'type' => PasswordType::class,
+                'invalid_message' => 'Passwords do not match.',
+                'first_options'  => ['label' => 'Type your new password'],
+                'second_options' => ['label' => 'Retype your new password']
             ])
             ->add('campus', EntityType::class,[
                 'label'=> 'campus',

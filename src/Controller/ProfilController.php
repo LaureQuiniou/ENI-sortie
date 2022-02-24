@@ -28,14 +28,20 @@ class ProfilController extends AbstractController
      */
     public function ModifierProfil(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $participant = new Participant();
+        $participant=$this->getUser();
         $profilForm = $this->createForm(ProfilType::class, $participant);
        $profilForm->handleRequest($request);
 
             if($profilForm->isSubmitted() && $profilForm->isValid()){
+                $participant = $profilForm->getData();
+
+                if(!$profilForm->get('newPassword')->getData()){
+
+                }
+
                 $entityManager->persist($participant);
                 $entityManager->flush();
-                return $this->redirectToRoute('/profil');
+                return $this->redirectToRoute('profil');
             }
 
       return $this->render('profil/modifierProfil.html.twig',[

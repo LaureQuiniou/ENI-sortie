@@ -6,8 +6,9 @@
 
 {% block body %}
 
-    {{ form_start(profilForm) }}
+    <h2>Mon profil</h2>
 
+    {{ form_start(profilForm) }}
     {{ form_row(profilForm.pseudo, {'value': app.user.pseudo}) }}
     {{ form_row(profilForm.prenom, {'value': app.user.prenom}) }}
     {{ form_row(profilForm.nom, {'value': app.user.nom}) }}
