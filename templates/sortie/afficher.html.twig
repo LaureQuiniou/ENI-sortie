@@ -39,7 +39,8 @@
                         <a href="{{ path('sortie_afficher') }}">Afficher</a>
 
                         {% if s.etat.libelle is same as("Ouverte") %}
-                            <a href="{{ path('sortie_afficher') }}">S'inscrire</a>
+                           <!-- <button onclick="inscritpiton.inscrip()">S'inscrire</button>-->
+                            <a href="{{ path('sortie_inscription', {'id': s.id}) }}" >S'inscrire</a>
                         {% endif %}
 
                         <a href="{{ path('sortie_afficher') }}">Se désister</a>
@@ -59,6 +60,7 @@
                 </tbody>
             </table>
     </div>
+   <!--<script src="inscritpiton.js"></script>-->
 {% endblock %}
 
 {% block title %}
