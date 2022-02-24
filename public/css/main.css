@@ -114,3 +114,8 @@ tbody{
 .btn-primary:hover{
     background-color: #075951;
 }
+.FlexInfoDateUser{
+    display: flex;
+    justify-content: right;
+    justify-items: right;
+}
