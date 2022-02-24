@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Sortie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
@@ -26,6 +27,17 @@ class SortieRepository extends ServiceEntityRepository
             ->addSelect('etat');
         $queryBuilder->leftJoin('s.organisateur','participant')
             ->addSelect('participant');
+        $query = $queryBuilder->getQuery();
+        $paginator = new Paginator($query);
+        return $paginator;
+    }
+
+    public function compteInscrits(Sortie $sortie){
+        $queryBuilder=$this->createQueryBuilder('s');
+        $queryBuilder->select('COUNT(participant.id)')
+                    ->innerJoin('s.participants', 'participants' )
+                    ->andWhere('sortie.id = :sortie')
+                    ->setParameter('sortie', $sortie);
         $query = $queryBuilder->getQuery();
         $paginator = new Paginator($query);
         return $paginator;
