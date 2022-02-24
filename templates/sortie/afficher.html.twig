@@ -41,31 +41,32 @@
                         {% endfor%}
                     </td>
                     <td>{{s.organisateur.nom}}</td>
+
+                    <!-- ACTIONS -->
                     <td>
                         <a href="{{ path('sortie_afficher') }}">Afficher</a>
-                        <!--3 conditions: ouvert, de la place, et pas déjà inscrit -->
-                        {% if s.etat.libelle is same as("Ouverte") %}
-                            {% if s.participants|length < s.nbInscriptionsMax  %}
 
-                                {% for p in s.participants  %}
-                                    {% if p != app.user %}
-                                        <!--<button onclick="inscription.inscrip()">S'inscrire</button>-->
-                                        <a href="{{ path('sortie_inscription', {'id': s.id}) }}" >S'inscrire</a>
+                        <!--S'INSCRIRE : 3 conditions: ouvert, de la place, et pas déjà inscrit -->
+                        {% for p in s.participants  %}
+                            {% if not p is same as app.user %}
+                                 {% if s.etat.libelle is same as("Ouverte") %}
+                                    {% if s.participants|length < s.nbInscriptionsMax  %}
+                                       <a href="{{ path('sortie_inscription', {'id': s.id}) }}" >S'inscrire</a>
                                     {% endif %}
-                                {% endfor%}
-
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
+                        {% endfor%}
 
-                        <!--2 conditions : état pas "en cours et "en création" , s'être inscrit -->
-                        {% if s.etat.libelle is same as("Ouverte") or s.etat.libelle is same as("Clôturée")%}
-                            {% for p in s.participants %}
-                                {% if p is same as(app.user) %}
+                        <!--SE DESISTER 2 conditions : état pas "en cours et "en création" , s'être inscrit -->
+                        {% for p in s.participants  %}
+                            {% if p is same as(app.user) %}
+                                {% if s.etat.libelle is same as("Ouverte") or s.etat.libelle is same as("Clôturée")%}
                                     <a href="{{ path('sortie_afficher') }}">Se désister</a>
                                 {% endif %}
-                            {% endfor%}
-                        {% endif %}
+                            {% endif %}
+                        {% endfor%}
 
+                        <!--PUBLIER , MODIFIER ET ANNULER -->
                         {% if app.user.id is same as(s.organisateur.id) %}
                             {% if s.etat.libelle is same as("En création") %}
                                  <a href="{{ path('sortie_afficher') }}">Publier</a>
