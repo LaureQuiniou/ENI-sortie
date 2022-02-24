@@ -18,7 +18,7 @@ class SortieController extends AbstractController
      */
     public function afficherTableau(SortieRepository $sortieRepository): Response
     {
-        $sorties=$sortieRepository->findAll();
+        $sorties=$sortieRepository->findSorties();
         return $this->render('sortie/afficher.html.twig', [
             "sorties"=>$sorties
 
