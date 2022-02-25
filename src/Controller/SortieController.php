@@ -125,15 +125,13 @@ class SortieController extends AbstractController
         return $this->render('afficherSortie.html.twig');
     }
 
-
     /**
-     * @Route ("/modifierSortie", name="modifier_sortie")
+     * @Route("/modifierSortie",name="modifier_sortie")
      */
-    public function modifierSortie(): Response
+    public function modifierSortie()
     {
-        return $this->render('modifierSortie.html.twig');
+        return $this->render('sortie/modifSortie.html.twig');
     }
-
 
     /**
      * @Route ("/annulerSortie", name="annuler_sortie")
