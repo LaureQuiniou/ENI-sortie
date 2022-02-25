@@ -120,9 +120,9 @@ class SortieController extends AbstractController
     /**
      * @Route ("/afficherSortie", name="afficher_sortie")
      */
-    public function afficherSortie(): Response
+    public function afficherSortie()
     {
-        return $this->render('afficherSortie.html.twig');
+        return $this->render('sortie/afficherSortie.html.twig');
     }
 
     /**
@@ -136,9 +136,9 @@ class SortieController extends AbstractController
     /**
      * @Route ("/annulerSortie", name="annuler_sortie")
      */
-    public function annulerSortie(): Response
+    public function annulerSortie()
     {
-        return $this->render('annulerSortie.html.twig');
+        return $this->render('sortie/annulerSortie.html.twig');
     }
 }
 
