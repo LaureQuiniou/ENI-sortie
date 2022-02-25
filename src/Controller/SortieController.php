@@ -14,7 +14,7 @@ use App\Repository\LieuRepository;
 
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
-use App\Repository\WishRepository;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
