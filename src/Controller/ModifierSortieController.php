@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\SortieType;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +20,9 @@ class ModifierSortieController extends AbstractController
     public function modifierSortie(int $id, EntityManagerInterface $entityManager, Request $request,SortieRepository $sortieRepository): Response
     {
         //récupère cette sortie
-        $sortieEnCours=$sortieRepository->find($id); // Trouver la sortie actuelle en cherchant son id
+        $sortieEnCours=$sortieRepository->find($id);
+
+        //Génère le Form
         $sortieForm = $this->createForm(SortieType::class, $sortieEnCours);
         $sortieForm->handleRequest($request);
 
@@ -32,9 +35,7 @@ class ModifierSortieController extends AbstractController
         }
 
         //Redirige
-        return $this->render('modifier_sortie/modifSortie.html.twig', [
-            'sortieForm'=>$sortieForm->createView()
-        ]);
+        return $this->renderForm('modifier_sortie/modifSortie.html.twig', compact ('sortieForm') );
     }
 
 }
