@@ -23,19 +23,16 @@
             <div class="container">
                 <!--NAV.BARRE ET TITRE -->
                 <div class="row">
-                    <h1 class="col"><a href="#"><img src="{{ asset('img/logo.png') }}" alt="Logo"></a>Sortir.com</h1>
+                    <h1 class="col"><a href="{{ path('sortie_afficher') }}"><img src="{{ asset('img/logo.png') }}" alt="Logo"></a>Sortir.com</h1>
                     <ul class="nav justify-content-end col">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#" >Active</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Accueil</a>
+                            <a class="nav-link" href="{{ path('sortie_afficher') }}">Accueil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path('profil') }}">Mon profil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Se déconnecter</a>
+                            <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
                         </li>
                     </ul>
                 </div>

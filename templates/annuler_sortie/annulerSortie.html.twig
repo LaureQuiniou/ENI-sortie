@@ -3,5 +3,16 @@
 {% block title %}Annuler une sortie{% endblock %}
 
 {% block body %}
-<p>Annuler</p>
+    <section>
+        <h2>Annuler une sortie</h2>
+        <div>
+            <p>Nom de la sortie : {{ sorties.nom}}</p>
+            <p>Date de la sortie : {{ sorties.dateHeureDebut.format('m/d/Y') }}</p>
+            <p>Campus : {{ sorties.campus.nom }}</p>
+            <p>Lieu : {{ sorties.campus.nom }}</p>
+            <p>Motif : </p>
+        </div>
+        <button class="btn btn-lg btn-primary">Enregistrer</button>
+        <button class="btn btn-lg btn-primary">Annuler</button>
+    </section>
 {% endblock %}
