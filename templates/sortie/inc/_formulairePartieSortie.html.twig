@@ -23,13 +23,15 @@
     {{ form_widget(sortieForm.nbInscriptionsMax) }}
     {{ form_errors(sortieForm.nbInscriptionsMax) }}
 </div>
-<div>
-    <label for="campus" class="form-label">Campus</label>
-    <input class="form-control" type="text" value="{{ app.user.campus.nom }}" id="campus" disabled>
 
-</div>
 <div>
     {{ form_label(sortieForm.infosSortie) }}
     {{ form_widget(sortieForm.infosSortie) }}
     {{ form_errors(sortieForm.infosSortie) }}
+</div>
+
+<div>
+    <label for="campus" class="form-label">Campus</label>
+    <input class="form-control" type="text" value="{{ app.user.campus.nom }}" id="campus" disabled>
+
 </div>
