@@ -10,33 +10,28 @@
 
 {% block body %}
     <h2>Créer une nouvelle sortie</h2>
+    {{ form_start(sortieForm) }}
+        {%  include 'sortie/inc/_formulairePartieSortie.html.twig' with {sortieForm: sortieForm} %}
 
-    {{ form_start(sortieForm, {'attr':{'class':'form-control'}}) }}
-    <div class="form-sortie">
-        <div>{{ form_row(sortieForm.nom) }}</div>
-        <div>{{ form_row(sortieForm.dateHeureDebut) }}</div>
-        <div>{{ form_row(sortieForm.dateLimiteInscription) }}</div>
-        <div>{{ form_row(sortieForm.duree) }}</div>
-        <div>{{ form_row(sortieForm.nbInscriptionsMax) }}</div>
-        <div>{{ form_row(sortieForm.infosSortie, {'label': 'Description de la sortie'}) }}</div>
-    </div>
-
-
-        {{ form_label(sortieForm.lieu.ville) }}
-        {{ form_widget(sortieForm.lieu.ville) }}
-        {{ form_errors(sortieForm.lieu.ville) }}
-        {{ form_label(sortieForm.lieu.nom) }}
-        {{ form_widget(sortieForm.lieu.nom) }}
-        {{ form_errors(sortieForm.lieu.nom) }}
-        {{ form_label(sortieForm.lieu.rue) }}
-        {{ form_widget(sortieForm.lieu.rue) }}
-        {{ form_errors(sortieForm.lieu.rue) }}
-        {{ form_label(sortieForm.lieu.latitude) }}
-        {{ form_widget(sortieForm.lieu.latitude) }}
-        {{ form_errors(sortieForm.lieu.latitude) }}
-        {{ form_label(sortieForm.lieu.longitude) }}
-        {{ form_widget(sortieForm.lieu.longitude) }}
-        {{ form_errors(sortieForm.lieu.longitude) }}
+        <div>
+            {{ form_label(sortieForm.lieu.ville) }}
+            {{ form_widget(sortieForm.lieu.ville) }}
+            {{ form_errors(sortieForm.lieu.ville) }}
+            {{ form_label(sortieForm.lieu.nom) }}
+            {{ form_widget(sortieForm.lieu.nom) }}
+            {{ form_errors(sortieForm.lieu.nom) }}
+            {{ form_label(sortieForm.lieu.rue) }}
+            {{ form_widget(sortieForm.lieu.rue) }}
+            {{ form_errors(sortieForm.lieu.rue) }}
+        </div>
+        <div>
+            {{ form_label(sortieForm.lieu.latitude) }}
+            {{ form_widget(sortieForm.lieu.latitude) }}
+            {{ form_errors(sortieForm.lieu.latitude) }}
+            {{ form_label(sortieForm.lieu.longitude) }}
+            {{ form_widget(sortieForm.lieu.longitude) }}
+            {{ form_errors(sortieForm.lieu.longitude) }}
+        </div>
         <div class="boutons">
             <button type="submit" class="btn btn-lg btn-primary">Enregistrer</button>
             <button type="submit" class="btn btn-lg btn-primary">Publier la sortie</button>
