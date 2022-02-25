@@ -7,53 +7,8 @@
     <h2>Modifier une sortie</h2>
     {# récupère le Formulaire crée dans le controller  #}
     {# Soit je détails avec : {{ form_row(sortieForm.nom, {'value': app.user.pseudo}) }} Soit les champs non précisé sont affichés automatiquement#}
+
     {{ form_start(sortieForm) }}
-        {{ form_label(sortieForm.nom) }}
-        {{ form_widget(sortieForm.nom) }}
-        {{ form_errors(sortieForm.nom) }}
-
-        {{ form_label(sortieForm.dateHeureDebut) }}
-        {{ form_widget(sortieForm.dateHeureDebut) }}
-        {{ form_errors(sortieForm.dateHeureDebut) }}
-
-        {{ form_label(sortieForm.dateLimiteInscription) }}
-        {{ form_widget(sortieForm.dateLimiteInscription) }}
-        {{ form_errors(sortieForm.dateLimiteInscription) }}
-
-        {{ form_label(sortieForm.nbInscriptionsMax) }}
-        {{ form_widget(sortieForm.nbInscriptionsMax) }}
-        {{ form_errors(sortieForm.nbInscriptionsMax) }}
-
-        {{ form_label(sortieForm.duree) }}
-        {{ form_widget(sortieForm.duree) }}
-        {{ form_errors(sortieForm.duree) }}
-
-        {{ form_label(sortieForm.infosSortie) }}
-        {{ form_widget(sortieForm.infosSortie) }}
-        {{ form_errors(sortieForm.infosSortie) }}
-
-    {# Campus #}
-        {{ form_label(sortieForm.campus.nom) }}
-        {{ form_widget(sortieForm.campus.nom) }}
-        {{ form_errors(sortieForm.campus.nom) }}
-
-        {{ form_label(sortieForm.lieu.nom) }}
-        {{ form_widget(sortieForm.lieu.nom) }}
-        {{ form_errors(sortieForm.lieu.nom) }}
-
-        {{ form_label(sortieForm.lieu.rue) }}
-        {{ form_widget(sortieForm.lieu.rue) }}
-        {{ form_errors(sortieForm.lieu.rue) }}
-
-    {# Code postal #}
-
-        {{ form_label(sortieForm.lieu.latitude) }}
-        {{ form_widget(sortieForm.lieu.latitude) }}
-        {{ form_errors(sortieForm.lieu.latitude) }}
-
-        {{ form_label(sortieForm.lieu.longitude) }}
-        {{ form_widget(sortieForm.lieu.longitude) }}
-        {{ form_errors(sortieForm.lieu.longitude) }}
     <div class="boutons">
         <button type="submit" class="btn btn-lg btn-primary">Enregistrer</button>
         <button type="submit" class="btn btn-lg btn-primary">Publier la sortie</button>
