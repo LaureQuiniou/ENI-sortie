@@ -58,13 +58,17 @@
                         {% endif %}
 
                         <!--SE DESISTER 2 conditions : état pas "en cours et "en création" , s'être inscrit -->
+                        {% set desister = false %}
                         {% for p in s.participants  %}
                             {% if p is same as(app.user) %}
-                                {% if s.etat.libelle is same as("Ouverte") or s.etat.libelle is same as("Clôturée")%}
-                                    <a href="{{ path('sortie_afficher') }}">Se désister</a>
-                                {% endif %}
+                                {% set desister = true %}
                             {% endif %}
                         {% endfor%}
+                        {% if inscrit %}
+                            {% if s.etat.libelle is same as("Ouverte") or s.etat.libelle is same as("Clôturée")%}
+                                <a href="{{ path('sortie_desister', {id:s.id}) }}">Se désister</a>
+                            {% endif %}
+                        {% endif %}
 
                         <!--PUBLIER , MODIFIER ET ANNULER -->
                         {% if app.user.id is same as(s.organisateur.id) %}
