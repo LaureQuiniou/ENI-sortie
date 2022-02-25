@@ -38,9 +38,9 @@ class ProfilType extends AbstractType
                 'mapped'=>false,
                 'required' => false,
                 'type' => PasswordType::class,
-                'invalid_message' => 'Passwords do not match.',
-                'first_options'  => ['label' => 'Type your new password'],
-                'second_options' => ['label' => 'Retype your new password']
+                'invalid_message' => 'Les mots des passes doivent êtes identiques.',
+                'first_options'  => ['label' => 'Entrez votre nouveau mot de passe'],
+                'second_options' => ['label' => 'Confirmation nouveau mot de passe']
             ])
             ->add('campus', EntityType::class,[
                 'label'=> 'campus',
