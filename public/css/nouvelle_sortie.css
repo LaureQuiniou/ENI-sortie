@@ -8,12 +8,28 @@ textarea{
     width: 440px;
 }
 
+form{
+    min-height: 745px;
+    width: 100%;
+    display: grid;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-items: center;
+}
+
 .boutons{
-
     display: flex;
-    flex-wrap: wrap;
     gap: 30px;
-    justify-content: center;
-    padding-top: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
 
+.formulaire{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    max-height: 700px;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 5px 35px;
 }

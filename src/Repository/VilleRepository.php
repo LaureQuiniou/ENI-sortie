@@ -19,6 +19,11 @@ class VilleRepository extends ServiceEntityRepository
         parent::__construct($registry, Ville::class);
     }
 
+    public function findVille($data): array{
+        // à finir aurélie
+        return $this->findAll();
+    }
+
     // /**
     //  * @return Ville[] Returns an array of Ville objects
     //  */
