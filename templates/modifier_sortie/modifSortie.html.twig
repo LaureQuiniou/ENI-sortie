@@ -9,13 +9,25 @@
     {# Soit je détails avec : {{ form_row(sortieForm.nom, {'value': app.user.pseudo}) }} Soit les champs non précisé sont affichés automatiquement#}
 
     {{ form_start(sortieForm) }}
-    <div class="boutons">
-        <button type="submit" class="btn btn-lg btn-primary">Enregistrer</button>
-        <button type="submit" class="btn btn-lg btn-primary">Publier la sortie</button>
-        <button type="submit" class="btn btn-lg btn-primary">Supprimer la sortie</button>
-        <button type="reset" class="btn btn-lg btn-primary">Annuler</button>
-    </div>
+        {{ form_row(sortieForm.nom) }}
+        {{ form_row(sortieForm.dateHeureDebut) }}
+        {{ form_row(sortieForm.dateLimiteInscription) }}
+        {{ form_row(sortieForm.nbInscriptionsMax) }}
+        {{ form_row(sortieForm.duree) }}
+        {{ form_row(sortieForm.infosSortie) }}
+    {# Campus #}
+         {{ form_row(sortieForm.campus.nom) }}
+         {{ form_row(sortieForm.lieu.nom) }}
+         {{ form_row(sortieForm.lieu.rue) }}
+         {{ form_row(sortieForm.lieu.latitude) }}
+         {{ form_row(sortieForm.lieu.longitude) }}
 
+        <div class="boutons">
+            <button type="submit" class="btn btn-lg btn-primary">Enregistrer</button>
+            <button type="submit" class="btn btn-lg btn-primary">Publier la sortie</button>
+            <button type="submit" class="btn btn-lg btn-primary">Supprimer la sortie</button>
+            <button type="reset" class="btn btn-lg btn-primary">Annuler</button>
+        </div>
     {{ form_end(sortieForm) }}
 
 {% endblock %}
