@@ -19,9 +19,9 @@ class SortieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', TextType::class,['attr' =>['class' => 'form-control']])
+            ->add('nom', TextType::class)
             ->add('dateHeureDebut', DateTimeType::class,['html5'=>true, 'widget'=>'single_text','attr' => ['class' => 'form-control']])
-            ->add('dateLimiteInscription',DateType::class,['html5'=>true, 'widget'=>'single_text', 'attr' => ['class' => 'form-control']])
+            ->add('dateLimiteInscription',DateTimeType::class,['html5'=>true, 'widget'=>'single_text', 'attr' => ['class' => 'form-control']])
             ->add('duree', TimeType::class, ['html5'=>true, 'widget'=>'single_text', 'attr' => ['class' => 'form-control']])
             ->add('nbInscriptionsMax',IntegerType::class, ['attr' => ['class' => 'form-control','min'=>'2','value'=>'2'], 'label'=>'Nombre Maximum de participants'])
             ->add('infosSortie', TextareaType::class,['label'=>'Description de la sortie', 'attr' => ['class' => 'form-control']])
