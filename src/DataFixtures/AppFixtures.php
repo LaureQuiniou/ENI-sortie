@@ -251,7 +251,7 @@ class AppFixtures extends Fixture
         $sortie8->setDateLimiteInscription(new \DateTime('2022-03-05 22:00:00'));
         $sortie8->setDuree(new \DateTime('14:30:00'));
         $sortie8->setOrganisateur($user1);
-        $sortie8->setEtat($creation);
+        $sortie8->setEtat($passee);
         $sortie8->setNbInscriptionsMax(18);
         $sortie8->addParticipant($user2);
         $sortie8->addParticipant($user3);
