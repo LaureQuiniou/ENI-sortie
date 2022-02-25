@@ -1,36 +1,52 @@
 .blocGauche,.blocDroit{
-    width: 400px;
+    width: 500px;
     padding: 10px;
 }
 p{
     display: block;
+    margin-left: 15px;
 }
-table {
-    border-width:1px;
-    border-style:solid;
-    border-color:black;
-    width:50%;
-}
-thead
-{
-    position: relative;
-    top: 0px;
-    left: 0px;
-}
-tbody
-{
-    position: relative;
-    top: 30px;
-    left: 0px;
-}
-
-.scroller {
-    height: 100px;
-    overflow: scroll;
-    width: 50%;
+h2{
+    text-align: center;
+    margin-bottom: 30px;
 }
 .bloc{
     display: flex;
     height: 300px;
 }
+label{
+    font-weight: bold;
+}
+.label-sortie{
+    display: flex;
+}
+table {
+    border-width:1px;
+    border-style:solid;
+    border-color:black;
+    width:100%;
+}
+thead,tfoot {
+    background-color: #171B45;
+    color: white;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+}
+tbody{
+    font-size: 16px;
+    position: relative;
+}
+table, th, td {
+    border: 1px solid;
+    table-layout: auto;
+    table-layout: fixed;
+    text-align :center;
+}
+
+.scroller {
+    height: 200px;
+    overflow: scroll;
+    width: 70%;
+}
+
 
