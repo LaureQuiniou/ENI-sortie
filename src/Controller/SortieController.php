@@ -130,6 +130,10 @@ class SortieController extends AbstractController
      */
     public function modifierSortie()
     {
+        $profilForm = $this->createForm(ProfilType::class, $participant);
+        $profilForm->handleRequest($request);
+
+        //Redirige
         return $this->render('sortie/modifSortie.html.twig');
     }
 

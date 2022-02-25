@@ -3,5 +3,22 @@
 {% block title %}Modifier{% endblock %}
 
 {% block body %}
-    <p>Page modifier une sortie</p>
+
+    <h2>Modifier une sortie</h2>
+
+    {{ form_start(profilForm) }}
+    {{ form_row(profilForm.pseudo, {'value': app.user.pseudo}) }}
+    {{ form_row(profilForm.prenom, {'value': app.user.prenom}) }}
+    {{ form_row(profilForm.nom, {'value': app.user.nom}) }}
+    {{ form_row(profilForm.telephone, {'value': app.user.telephone}) }}
+    {{ form_row(profilForm.email, {'value': app.user.email}) }}
+    {{ form_row(profilForm.newPassword) }}
+    {{ form_widget(profilForm) }}
+
+    <div>
+        <button type="submit" class=" btn btn-lg btn-primary">Enregistrer</button>
+        <button type="reset" class="btn btn-lg btn-primary">Annuler</button>
+    </div>
+    {{ form_end(profilForm) }}
+
 {% endblock %}
