@@ -87,6 +87,35 @@ class SortieController extends AbstractController
 
         ]);
     }
+
+    /**
+     * @Route("/desister/{id}", name="sortie_desister", methods={"GET"})
+     */
+    public function desisterSortie(int $id, EntityManagerInterface $entityManager, SortieRepository $sortieRepository, ParticipantRepository $participantRepository): Response
+    {
+        $sortieEnCours=$sortieRepository->find($id); // Trouver la sortie actuelle en cherchant son id
+        $participant=new Participant();
+        $participant=$participantRepository->findOneBy(['email'=>$this->getUser()->getUserIdentifier()]);
+        dump($sortieEnCours);
+        $sortieEnCours->removeParticipant($participant); //trouver le user actuel -> ajouter le participant à la sortie
+
+        //sauvegarde en BDD
+        $entityManager->persist($sortieEnCours);
+        $entityManager->flush();
+
+        //message de confirmation qui s'affiche
+        $this->addFlash('succes', 'Tu ne participeras plus, dommage !');
+
+        //on réaffiche les sorties
+        $sorties=$sortieRepository->findSorties();
+
+        //on redirige
+        return $this->render('sortie/afficher.html.twig', [
+            "sorties"=>$sorties,
+            //Je rajoute ca???  'id'=>$id->getId()
+
+        ]);
+    }
 }
 
 
