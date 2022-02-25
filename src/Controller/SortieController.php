@@ -116,30 +116,6 @@ class SortieController extends AbstractController
 
         ]);
     }
-
-    /**
-     * @Route ("/afficherSortie", name="afficher_sortie")
-     */
-    public function afficherSortie()
-    {
-        return $this->render('sortie/afficherSortie.html.twig');
-    }
-
-    /**
-     * @Route("/modifierSortie",name="modifier_sortie")
-     */
-    public function modifierSortie()
-    {
-        return $this->render('sortie/modifSortie.html.twig');
-    }
-
-    /**
-     * @Route ("/annulerSortie", name="annuler_sortie")
-     */
-    public function annulerSortie()
-    {
-        return $this->render('sortie/annulerSortie.html.twig');
-    }
 }
 
 

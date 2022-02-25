@@ -1,12 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-    Profil
-{% endblock %}
+{% block title %}Modifier{% endblock %}
 
 {% block body %}
 
-    <h2>Mon profil</h2>
+    <h2>Modifier une sortie</h2>
 
     {{ form_start(profilForm) }}
     {{ form_row(profilForm.pseudo, {'value': app.user.pseudo}) }}
@@ -19,8 +17,6 @@
 
     <div>
         <button type="submit" class=" btn btn-lg btn-primary">Enregistrer</button>
-        <button type="submit" class=" btn btn-lg btn-primary">Publier la sortie</button>
-        <button type="submit" class=" btn btn-lg btn-primary">Supprimer la sortie</button>
         <button type="reset" class="btn btn-lg btn-primary">Annuler</button>
     </div>
     {{ form_end(profilForm) }}
