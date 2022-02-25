@@ -80,7 +80,7 @@
                         <!--PUBLIER , MODIFIER 2 conditions : état "en création" et être organisateur -->
                         {% if s.organisateur is same as(app.user) %}
                             {% if s.etat.libelle is same as("Création") %}
-                                <a href="{{ path('afficher_une_sortie'), {id:s.id} }}">Publier</a>
+                                <a href="{{ path('afficher_une_sortie', {id:s.id} )}}">Publier</a>
                                 <a href="{{ path('modifier_sortie', {id:s.id}) }}">Modifier</a>
                             {% endif %}
                         {% endif %}
