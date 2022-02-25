@@ -8,24 +8,24 @@
 
 {% block body %}
     <section>
-        <h3>Détails de la sortie</h3>
+        <h2>Détails de la sortie</h2>
 
         <div class="bloc">
         <div class="blocGauche" >
-            <p>Nom de la sortie : {{ sortie.nom }}</p>
-            <p>Date et heure de la sortie : {{ sortie.dateHeureDebut | date('d/M/Y h:m', false)}}</p>
-            <p>Date limite d'inscription : {{ sortie.dateLimiteInscription | date('d/M/Y')}}</p>
-            <p>Nombre de places : {{ sortie.nbInscriptionsMax }}</p>
-            <p>Durée : {{ sortie.duree | date('h') }} h {{ sortie.duree | date('m') }} min</p>
-            <p>Description et infos : {{ sortie.infosSortie }}</p>
+            <div class="label-sortie"><label>Nom de la sortie :</label> <p> {{ sortie.nom }}</p></div>
+            <div class="label-sortie"><label>Date et heure de la sortie :</label> <p> {{ sortie.dateHeureDebut | date('d/M/Y h:m', false)}}</p></div>
+            <div class="label-sortie"><label>Date limite d'inscription : </label> <p> {{ sortie.dateLimiteInscription | date('d/M/Y')}}</p></div>
+            <div class="label-sortie"><label>Nombre de places : </label> <p> {{ sortie.nbInscriptionsMax }}</p></div>
+            <div class="label-sortie"><label>Durée :  </label> <p> {{ sortie.duree | date('h') }} h {{ sortie.duree | date('m') }} min</p></div>
+            <div class="label-sortie"><label>Description et infos :   </label> <p> {{ sortie.infosSortie }}</p></div>
         </div>
         <div class="blocDroit">
-            <p>Campus : {{ sortie.organisateur.campus.nom }}</p>
-            <p>Lieu : {{ sortie.lieu.nom }}</p>
-            <p>Rue : {{ sortie.lieu.rue }}</p>
-            <p>Code postal : {{ sortie.lieu.ville.codePostal }}</p>
-            <p>Latitude : {{ sortie.lieu.latitude }}</p>
-            <p>Longitude: {{ sortie.lieu.longitude }}</p>
+            <div class="label-sortie"><label>Campus :   </label> <p> {{ sortie.organisateur.campus.nom }}</p></div>
+            <div class="label-sortie"><label>Lieu :   </label> <p> {{ sortie.lieu.nom }}</p></div>
+            <div class="label-sortie"><label>Rue : </label> <p> {{ sortie.lieu.rue }}</p></div>
+            <div class="label-sortie"><label>Code postal :   </label> <p> {{ sortie.lieu.ville.codePostal }}</p></div>
+            <div class="label-sortie"><label>Latitude : </label> <p> {{ sortie.lieu.latitude }}</p></div>
+            <div class="label-sortie"><label>Longitude:  </label> <p>  {{ sortie.lieu.longitude }}</p></div>
         </div>
         </div>
 
