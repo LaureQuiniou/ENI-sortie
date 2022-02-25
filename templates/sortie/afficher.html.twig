@@ -44,7 +44,10 @@
 
                     <!-- ACTIONS -->
                     <td>
-                        <a href="{{ path('sortie_afficher') }}">Afficher</a>
+                        <!--AFFICHER : 2 conditions négatives: pas "en création" et pas organisateur -->
+                        {% if not s.etat.libelle is same as("Création")  %}
+                            <a href="{{ path('sortie_afficher') }}">Afficher</a>
+                        {% endif %}
 
                         <!--S'INSCRIRE : 3 conditions: ouvert, de la place, et pas déjà inscrit -->
                         {% set inscrit = false %}
@@ -71,24 +74,17 @@
                         {% endif %}
 
                         <!--PUBLIER , MODIFIER 2 conditions : état "en création" et être organisateur -->
-
-
-                        {% for o in s.organisateur %}
-                            {% if o is same as(app.user.id) %}
-                                X
+                        {% if s.organisateur is same as(app.user) %}
+                            {% if s.etat.libelle is same as("Création") %}
+                                <a href="{{ path('sortie_afficher') }}">Publier</a>
+                                <a href="{{ path('sortie_afficher') }}">Modifier</a>
                             {% endif %}
-                        {% endfor%}
+                        {% endif %}
 
                         <!--ANNULER : 1 condition état "ouverte" et être organisateur  -->
-                        {% set annuler = false %}
-                        {% for o in s.organisateur %}
-                            {% if o is same as(app.user) %}
-                                {% set annuler = true %}
-                            {% endif %}
-                        {% endfor%}
-                        {% if annuler %}
+                        {% if s.organisateur is same as(app.user) %}
                             {% if s.etat.libelle is same as("Ouverte") %}
-                                 <a href="{{ path('sortie_afficher') }}">Annuler</a>
+                                <a href="{{ path('sortie_afficher') }}">Annuler</a>
                             {% endif %}
                         {% endif %}
                     </td>
