@@ -1,12 +1,14 @@
 section{
     padding: 20px;
-    width: auto;
+    margin: 0 auto;
+    width: 50%;
 }
 
 h2{
+    margin-top: 10px;
     margin-bottom: 5%;
 }
 
 p{
-    padding-bottom: 10px;
+    padding-bottom: 20px;
 }

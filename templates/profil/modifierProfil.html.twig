@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
+{% endblock %}
+
 {% block title %}
     Profil
 {% endblock %}
@@ -9,13 +13,17 @@
     <h2>Mon profil</h2>
 
     {{ form_start(profilForm) }}
-    {{ form_row(profilForm.pseudo, {'value': app.user.pseudo}) }}
-    {{ form_row(profilForm.prenom, {'value': app.user.prenom}) }}
-    {{ form_row(profilForm.nom, {'value': app.user.nom}) }}
-    {{ form_row(profilForm.telephone, {'value': app.user.telephone}) }}
-    {{ form_row(profilForm.email, {'value': app.user.email}) }}
-    {{ form_row(profilForm.newPassword) }}
-
+    <div>
+        {{ form_row(profilForm.pseudo, {'value': app.user.pseudo}) }}
+        {{ form_row(profilForm.prenom, {'value': app.user.prenom}) }}
+        {{ form_row(profilForm.nom, {'value': app.user.nom}) }}
+        {{ form_row(profilForm.telephone, {'value': app.user.telephone}) }}
+    </div>
+    <div>
+        {{ form_row(profilForm.email, {'value': app.user.email}) }}
+        {{ form_row(profilForm.campus) }}
+        {{ form_row(profilForm.newPassword) }}
+    </div>
     <div>
         <button type="submit" class=" btn btn-lg btn-primary">Enregistrer</button>
         <button type="reset" class="btn btn-lg btn-primary">Annuler</button>
