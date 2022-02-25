@@ -81,7 +81,7 @@
                         {% if s.organisateur is same as(app.user) %}
                             {% if s.etat.libelle is same as("Création") %}
                                 <a href="{{ path('sortie_afficher') }}">Publier</a>
-                                <a href="{{ path('sortie_afficher') }}">Modifier</a>
+                                <a href="{{ path('modifier_sortie') }}">Modifier</a>
                             {% endif %}
                         {% endif %}
 
