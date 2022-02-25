@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -24,20 +25,12 @@ class RegistrationFormType extends AbstractType
             ->add('prenom')
             ->add('pseudo')
             ->add('telephone')
-            ->add('campus', EntityType::class,[
-                'label'=> 'campus',
-                'class'=> Campus::class,
+            ->add('campus', EntityType::class, [
+                'label' => 'campus',
+                'class' => Campus::class,
                 'choice_label' => 'nom'
             ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
-            ->add('plainPassword', PasswordType::class, [
+            ->add('plainPassword', RepeatedType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
@@ -53,14 +46,24 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+                'invalid_message' => 'Les mots des passes doivent êtes identiques.',
+                'first_options'  => ['label' => 'Saississez un mot de passe'],
+                'second_options' => ['label' => 'Confirmation du mot de passe']
             ])
-        ;
+            ->add('agreeTerms', CheckboxType::class, [
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'You should agree to our terms.',
+                    ]),
+                ],
+            ]);
     }
-
-    public function configureOptions(OptionsResolver $resolver): void
+        public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Participant::class,
         ]);
     }
 }
+
