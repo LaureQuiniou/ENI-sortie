@@ -50,7 +50,7 @@
                     <td>
                         <!--AFFICHER : 2 conditions négatives: pas "en création" et pas organisateur -->
                         {% if not s.etat.libelle is same as("Création")  %}
-                            <a href="{{ path('sortie_afficher') }}">Afficher</a>
+                            <a href="{{ path('afficher_sortie') }}">Afficher</a>
                         {% endif %}
 
                         <!--S'INSCRIRE : 3 conditions: ouvert, de la place, et pas déjà inscrit -->
@@ -88,7 +88,7 @@
                         <!--ANNULER : 1 condition état "ouverte" et être organisateur  -->
                         {% if s.organisateur is same as(app.user) %}
                             {% if s.etat.libelle is same as("Ouverte") %}
-                                <a href="{{ path('sortie_afficher') }}">Annuler</a>
+                                <a href="{{ path('annuler_sortie') }}">Annuler</a>
                             {% endif %}
                         {% endif %}
                     </td>
