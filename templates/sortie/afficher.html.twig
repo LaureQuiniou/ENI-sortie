@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/tableau_sortie.css') }}">
+{% endblock %}
+
 {% block body %}
     <div class="FlexInfoDateUser">
         <p>Date du jour : {{ "now" |date('d/M/Y') }}</p>
@@ -10,9 +14,9 @@
     <div>
         <h2>Filtrer les sorties </h2>
     </div>
-    <div class="FlexSorties">
+    <div class="scroller">
             <table>
-                <thead>
+                <thead class="en-tête">
                 <tr>
                     <td>Nom de la sortie</td>
                     <td>Date de la sortie</td>

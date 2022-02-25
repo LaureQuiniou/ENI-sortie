@@ -14,7 +14,7 @@
             <p>Nom : {{ app.user.nom }}</p>
             <p>Téléphone : {{ app.user.telephone }}</p>
             <p>Email : {{ app.user.email }}</p>
-            <p>Campus :</p>
+            <p>Campus : {{ app.user.campus.nom }}</p>
         </div>
         <button class="btn btn-lg btn-primary">Retour</button>
         <a href="{{ path('profil_modifier') }}"><button class="btn btn-lg btn-primary">Modifier</button></a>
