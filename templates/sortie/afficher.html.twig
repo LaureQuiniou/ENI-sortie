@@ -70,14 +70,25 @@
                             {% endif %}
                         {% endif %}
 
-                        <!--PUBLIER , MODIFIER ET ANNULER -->
-                        {% if app.user.id is same as(s.organisateur.id) %}
-                            {% if s.etat.libelle is same as("En création") %}
-                                 <a href="{{ path('sortie_afficher') }}">Publier</a>
-                                <a href="{{ path('sortie_afficher') }}">Modifier</a>
+                        <!--PUBLIER , MODIFIER 2 conditions : état "en création" et être organisateur -->
+
+
+                        {% for o in s.organisateur %}
+                            {% if o is same as(app.user.id) %}
+                                X
                             {% endif %}
+                        {% endfor%}
+
+                        <!--ANNULER : 1 condition état "ouverte" et être organisateur  -->
+                        {% set annuler = false %}
+                        {% for o in s.organisateur %}
+                            {% if o is same as(app.user) %}
+                                {% set annuler = true %}
+                            {% endif %}
+                        {% endfor%}
+                        {% if annuler %}
                             {% if s.etat.libelle is same as("Ouverte") %}
-                                <a href="{{ path('sortie_afficher') }}">Annuler</a>
+                                 <a href="{{ path('sortie_afficher') }}">Annuler</a>
                             {% endif %}
                         {% endif %}
                     </td>
@@ -86,7 +97,6 @@
                 </tbody>
             </table>
     </div>
-   <!--<script src="inscription.js"></script>-->
 {% endblock %}
 
 {% block title %}
