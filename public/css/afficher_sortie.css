@@ -1,0 +1,36 @@
+.blocGauche,.blocDroit{
+    width: 400px;
+    padding: 10px;
+}
+p{
+    display: block;
+}
+table {
+    border-width:1px;
+    border-style:solid;
+    border-color:black;
+    width:50%;
+}
+thead
+{
+    position: relative;
+    top: 0px;
+    left: 0px;
+}
+tbody
+{
+    position: relative;
+    top: 30px;
+    left: 0px;
+}
+
+.scroller {
+    height: 100px;
+    overflow: scroll;
+    width: 50%;
+}
+.bloc{
+    display: flex;
+    height: 300px;
+}
+
