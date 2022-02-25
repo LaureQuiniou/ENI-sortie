@@ -147,6 +147,9 @@ class AppFixtures extends Fixture
         $sortie3 = new Sortie();
         $sortie4 = new Sortie();
         $sortie5 = new Sortie();
+        $sortie6 = new Sortie();
+        $sortie7 = new Sortie();
+        $sortie8 = new Sortie();
 
         $sortie1->setCampus($roche);
         $sortie1->setNom('Allez boire un verre');
@@ -212,11 +215,56 @@ class AppFixtures extends Fixture
         $sortie5->addParticipant($user3);
         $sortie5->addParticipant($user4);
 
+        $sortie6->setCampus($quinper);
+        $sortie6->setNom('Un petit bowling !!');
+        $sortie6->setInfosSortie('Pour les fan de Bowling !');
+        $sortie6->setLieu($bow);
+        $sortie6->setDateHeureDebut(new \DateTime('2022-03-26 15:00:00'));
+        $sortie6->setDateLimiteInscription(new \DateTime('2022-03-25 22:00:00'));
+        $sortie6->setDuree(new \DateTime('14:30:00'));
+        $sortie6->setOrganisateur($user1);
+        $sortie6->setEtat($creation);
+        $sortie6->setNbInscriptionsMax(18);
+        $sortie6->addParticipant($user2);
+        $sortie6->addParticipant($user3);
+        $sortie6->addParticipant($user4);
+
+        $sortie7->setCampus($quinper);
+        $sortie7->setNom('Rencontre entre élève');
+        $sortie7->setInfosSortie('Pour faire connaissance !');
+        $sortie7->setLieu($bow);
+        $sortie7->setDateHeureDebut(new \DateTime('2022-01-15 15:00:00'));
+        $sortie7->setDateLimiteInscription(new \DateTime('2022-01-14 22:00:00'));
+        $sortie7->setDuree(new \DateTime('14:30:00'));
+        $sortie7->setOrganisateur($user1);
+        $sortie7->setEtat($clot);
+        $sortie7->setNbInscriptionsMax(18);
+        $sortie7->addParticipant($user2);
+        $sortie7->addParticipant($user3);
+        $sortie7->addParticipant($user4);
+
+        $sortie8->setCampus($quinper);
+        $sortie8->setNom('Atelier couture');
+        $sortie8->setInfosSortie('Atelier couture, prévoyez vos machines et vos patrons !');
+        $sortie8->setLieu($bow);
+        $sortie8->setDateHeureDebut(new \DateTime('2022-03-04 15:00:00'));
+        $sortie8->setDateLimiteInscription(new \DateTime('2022-03-05 22:00:00'));
+        $sortie8->setDuree(new \DateTime('14:30:00'));
+        $sortie8->setOrganisateur($user1);
+        $sortie8->setEtat($creation);
+        $sortie8->setNbInscriptionsMax(18);
+        $sortie8->addParticipant($user2);
+        $sortie8->addParticipant($user3);
+        $sortie8->addParticipant($user4);
+
         $manager->persist($sortie1);
         $manager->persist($sortie2);
         $manager->persist($sortie3);
         $manager->persist($sortie4);
         $manager->persist($sortie5);
+        $manager->persist($sortie6);
+        $manager->persist($sortie7);
+        $manager->persist($sortie8);
 
         $manager->flush();
     }
