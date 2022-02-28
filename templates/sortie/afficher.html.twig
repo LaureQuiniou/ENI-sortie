@@ -44,7 +44,7 @@
                             {% endif %}
                         {% endfor%}
                     </td>
-                    <td>{{s.organisateur.nom}} </td>
+                    <td><a href="{{ path('profil_participant', { id:s.organisateur.id })}}">{{s.organisateur.nom}} </a></td>
 
                     <!-- ACTIONS -->
                     <td>

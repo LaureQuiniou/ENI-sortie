@@ -1,0 +1,21 @@
+    {% extends 'base.html.twig' %}
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
+    {% endblock %}
+
+    {% block title %}Profil de {{ participant.pseudo }} | {{ parent() }}{% endblock %}
+
+    {% block body %}
+        <section>
+            <h2>{{ participant.pseudo }}</h2>
+                <div class="div_profil">
+                    <p>Prénom : {{ participant.prenom }}</p>
+                    <p>Nom : {{ participant.nom }}</p>
+                    <p>Téléphone : {{ participant.telephone }}</p>
+                    <p>Email : {{ participant.email }}</p>
+                    <p>Campus : {{ participant.campus.nom }}</p>
+                </div>
+            <a href="{{ path('sortie_afficher') }}"><button class="btn btn-lg btn-primary">Retour</button></a>
+        </section>
+    {% endblock %}
