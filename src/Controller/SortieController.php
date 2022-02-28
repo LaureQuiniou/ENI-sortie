@@ -44,11 +44,10 @@ class SortieController extends AbstractController
     {
         //valeurs par défaut du formulaire de recherche
         $searchData = [
-            'est_inscrit' => true,
-            'pas_inscrit' => true,
-            'est_organisateur' => true,
-            'dateDebut' => new \DateTime("- 1 month"),
-            'dateFin' => new \DateTime("+ 1 year"),
+            'est_inscrit' => false,
+            'pas_inscrit' => false,
+            'est_organisateur' => false,
+            'sorties_passees'=>false,
         ];
         $searchForm = $this->createForm(SearchForm::class, $searchData);
         $searchForm->handleRequest($request);

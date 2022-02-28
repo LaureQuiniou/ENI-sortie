@@ -39,7 +39,7 @@ class SortieRepository extends ServiceEntityRepository
 
     public function searchSortiesAvecFiltres ($searchData, UserInterface $user){
 
-        //dd($searchData['motClef']->getId());
+        //dd($searchData['est_inscrit'],$searchData['pas_inscrit'], $searchData['sorties_passees']);
         $queryBuilder=$this->createQueryBuilder('s');
         $queryBuilder->leftJoin('s.etat','e')
             ->addSelect('e');
@@ -73,13 +73,12 @@ class SortieRepository extends ServiceEntityRepository
                 ->setParameter('dateFin', $searchData['dateFin']);
         }
         //filtre si user est organisateur
-        //$participant = $participantRepository->findOneBy($this->getUser()->getId());
         if (!empty($searchData['est_organisateur'])){
            $queryBuilder->andWhere('o.id = :organisateurId')
                ->setParameter('organisateurId', $user->getId());
         }
         //filtre si user est inscrit
-        if (!empty($searchData['est_inscrit'])){
+        if ($searchData['est_inscrit']){
             $queryBuilder->andWhere('p.id = :userId')
                ->setParameter('userId', $user->getId());
        }
@@ -89,12 +88,13 @@ class SortieRepository extends ServiceEntityRepository
                ->setParameter('userId', $user->getId());
         }
         //filtre sorties passées
-        if(!empty($searchData['sortie_passees'])){
-            $queryBuilder->andWhere('s.dateHeureDebut <= :today')
-                ->setParameter('today', date('d/m/Y'));
+        if(!empty($searchData['sorties_passees'])){
+            $queryBuilder->andWhere('s.dateHeureDebut < :today')
+                ->setParameter('today', date('Y/m/d'));
         }
 
         $query = $queryBuilder->getQuery();
+        //dd($query);
         $paginator = new Paginator($query);
         return $paginator;
     }
