@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class ProfilController extends AbstractController
 {
@@ -41,25 +42,25 @@ class ProfilController extends AbstractController
     }
 
     /**
-     * @Route("/profil/modifier", name="profil_modifier")
+     * @Route("/monProfil/modifier", name="profil_modifier")
      */
-    public function ModifierProfil(Request $request, EntityManagerInterface $entityManager, ParticipantRepository $participantRepository): Response
+    public function ModifierProfil(UserInterface $user,Request $request, EntityManagerInterface $entityManager, ParticipantRepository $participantRepository): Response
     {
-        $participant = $this->getUser();
-        $profilForm = $this->createForm(ProfilType::class, $participant);
+        //$participant = $this->getUser();
+        $profilForm = $this->createForm(ProfilType::class, $user);
         $profilForm->handleRequest($request);
 
             if($profilForm->isSubmitted() && $profilForm->isValid()){
 
                 // vérification si mot de passe est à changer (si champs newPassword pas null et pas vide)
                 if(!$request->request->get('newPassword') && $request->request->get('newPassword')!=''){
-                    $participant->setPassword($request->request->get('newPassword'));
+                    $user->setPassword($request->request->get('newPassword'));
                 }
 
-                $entityManager->persist($participant);
+                $entityManager->persist($user);
                 $entityManager->flush();
-                $this->addFlash('success','Youpi !!!!!!');
-                return $this->redirectToRoute('profil');
+                $this->addFlash('success','Youpi !!');
+                return $this->redirectToRoute('sortie_afficher');
             }
 
       return $this->render('profil/modifierProfil.html.twig',[
