@@ -25,9 +25,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class SortieController extends AbstractController
 {
-    /**
+    /*/**
      * @Route("/sortie", name="sortie_afficher")
      */
+    /*
     public function afficherTableau(SortieRepository $sortieRepository): Response
     {
         $sorties=$sortieRepository->findSorties();
@@ -35,9 +36,9 @@ class SortieController extends AbstractController
             "sorties"=>$sorties
 
         ]);
-    }
+    }*/
     /**
-     * @Route("/ListeSorties", name="sorties_liste")
+     * @Route("/sortie", name="sortie_afficher")
      */
     public function list(Request $request, SortieRepository $sortieRepository, UserInterface $user): Response
     {
