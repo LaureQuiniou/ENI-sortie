@@ -31,14 +31,16 @@ class SearchForm extends AbstractType
             ])
             ->add('dateDebut', DateType::class, [
                 'label' => 'Entre le',
-                'html5' => false,
+                'required' => false,
+                'html5'=>false,
                 'widget' => 'single_text',
                 'attr' => ['class' => 'datepicker'],
                 'format' => 'dd/MM/yyyy'
             ])
             ->add('dateFin', DateType::class, [
                 'label' => 'Et le',
-                'html5' => false,
+                'required' => false,
+                'html5'=>false,
                 'widget' => 'single_text',
                 'attr' => ['class' => 'datepicker'],
                 'format' => 'dd/MM/yyyy'
