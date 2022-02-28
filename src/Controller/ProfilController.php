@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Participant;
 use App\Form\ProfilType;
 use App\Repository\ParticipantRepository;
-use App\Repository\SerieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,12 +14,30 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProfilController extends AbstractController
 {
     /**
-     * @Route("/profil", name="profil")
+     * @Route("/monProfil", name="mon_profil")
      */
-    public function AfficherProfil(ParticipantRepository $participantRepository): Response
+    public function AfficherProfilUser(): Response
     {
 
-        return $this->render('profil/profil.html.twig');
+        return $this->render('profil/AfficherProfilUser.html.twig');
+    }
+
+    /**
+     * @Route ("/profilParticipant/{id}", name="profil_participant", methods={"GET"})
+     */
+    public function AfficherProfilParticipant(int $id, ParticipantRepository $participantRepository): Response
+    {
+        $profilParticipant= $participantRepository->find($id);
+
+        // si l'utilisateur n'existe pas en bdd, on déclenche une erreur 404
+        if(!$profilParticipant)
+        {
+            throw $this->createNotFoundException("Cet utilisateur n'existe pas...");
+        }
+
+        return $this->render('profil/afficherProfil.html.twig', [
+            'participant' => $profilParticipant
+        ]);
     }
 
     /**
