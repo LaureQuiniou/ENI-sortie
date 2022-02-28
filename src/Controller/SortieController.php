@@ -53,6 +53,7 @@ class SortieController extends AbstractController
         $searchForm = $this->createForm(SearchForm::class, $searchData);
         $searchForm->handleRequest($request);
         $searchData = $searchForm->getData();
+
         $sorties=$sortieRepository->searchSortiesAvecFiltres($searchData, $user);
 
         return $this->render('sortie/afficher.html.twig', [

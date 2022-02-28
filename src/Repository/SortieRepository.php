@@ -38,6 +38,8 @@ class SortieRepository extends ServiceEntityRepository
     }
 
     public function searchSortiesAvecFiltres ($searchData, UserInterface $user){
+
+        //dd($searchData['motClef']->getId());
         $queryBuilder=$this->createQueryBuilder('s');
         $queryBuilder->leftJoin('s.etat','e')
             ->addSelect('e');
@@ -49,45 +51,45 @@ class SortieRepository extends ServiceEntityRepository
             ->addSelect('c');
 
         //filtre par campus
-        if (!empty($searchData->campus)){
-            $queryBuilder->andWhere('o.campus = :campus')
-                ->setParameter('campus', $searchData->campus);
+        if (!empty($searchData['campus'])){
+            $queryBuilder->andWhere('c.id = :campus')
+                ->setParameter('campus', $searchData['campus']->getId());
         }
         //filtre par mot clef
-        if (!empty($searchData->motClef)){
+        if (!empty($searchData['motClef'])){
             $queryBuilder->andWhere('s.nom LIKE :motClef')
                 ->setParameter('motClef', '%'.$searchData['motClef'].'%');
             //$query->where('MATCH_AGAINST(s.nom, s.infosSortie) AGAINST (:mots boolean)>0')
              //   ->setParameter('mots', $mots);
         }
         //filtre par date de début
-        if (!empty($searchData->dateDebut)){
+        if (!empty($searchData['dateDebut'])){
             $queryBuilder->andWhere('s.dateHeureDebut >= :dateDebut')
-                ->setParameter('dateDebut', $searchData->dateDebut);
+                ->setParameter('dateDebut', $searchData['dateDebut']);
         }
         //filtre date de fin
-        if (!empty($searchData->dateFin)){
+        if (!empty($searchData['dateFin'])){
             $queryBuilder->andWhere('s.dateHeureDebut <= :dateFin')
-                ->setParameter('dateFin', $searchData->dateFin);
+                ->setParameter('dateFin', $searchData['dateFin']);
         }
         //filtre si user est organisateur
         //$participant = $participantRepository->findOneBy($this->getUser()->getId());
-        if (!empty($searchData->est_organisateur)){
-           $queryBuilder->andWhere('s.organisateur.id == :organisateur')
-               ->setParameter('organisateur', $user->getId());
+        if (!empty($searchData['est_organisateur'])){
+           $queryBuilder->andWhere('o.id = :organisateurId')
+               ->setParameter('organisateurId', $user->getId());
         }
         //filtre si user est inscrit
-        if (!empty($searchData->est_inscrit)){
-            $queryBuilder->andWhere('s.participants.id == :userId')
+        if (!empty($searchData['est_inscrit'])){
+            $queryBuilder->andWhere('p.id = :userId')
                ->setParameter('userId', $user->getId());
        }
         //filtre si user est pas inscrit
-        if (!empty($searchData->pas_inscrit)){
-           $queryBuilder->andWhere('s.participants.id !== :userId')
+        if (!empty($searchData['pas_inscrit'])){
+           $queryBuilder->andWhere('p.id != :userId')
                ->setParameter('userId', $user->getId());
         }
         //filtre sorties passées
-        if(!empty($searchData->sortie_passees)){
+        if(!empty($searchData['sortie_passees'])){
             $queryBuilder->andWhere('s.dateHeureDebut <= :today')
                 ->setParameter('today', date('d/m/Y'));
         }
