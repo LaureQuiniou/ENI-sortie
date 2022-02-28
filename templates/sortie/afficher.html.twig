@@ -13,6 +13,21 @@
     </div>
     <div>
         <h2>Filtrer les sorties </h2>
+        <div>
+            <h2>Filtrer les sorties </h2>
+            {{ form_start(searchForm) }}
+            {{ form_row(searchForm.campus) }}
+            {{ form_row(searchForm.motClef) }}
+            <div class="row">
+                {{ form_row(searchForm.dateDebut) }}
+                {{ form_row(searchForm.dateFin) }}
+            </div>
+            {{ form_row(searchForm.est_organisateur) }}
+            {{ form_row(searchForm.est_incrit) }}
+            {{ form_row(searchForm.pas_inscrit) }}
+            {{ form_row(searchForm.sorties_passees) }}
+            {{ form_end(searchForm) }}
+        </div>
     </div>
     <div class="scroller">
             <table>
