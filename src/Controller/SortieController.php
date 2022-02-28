@@ -21,6 +21,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 class SortieController extends AbstractController
 {
     /**
@@ -37,10 +39,9 @@ class SortieController extends AbstractController
     /**
      * @Route("/ListeSorties", name="sorties_liste")
      */
-    public function list(Request $request, SortieRepository $sortieRepository, ParticipantRepository $participantRepository): Response
+    public function list(Request $request, SortieRepository $sortieRepository, UserInterface $user): Response
     {
         //valeurs par défaut du formulaire de recherche
-        //sous forme de tableau associatif, car le form n'est pas associée à une entité
         $searchData = [
             'est_inscrit' => true,
             'pas_inscrit' => true,
@@ -50,7 +51,9 @@ class SortieController extends AbstractController
         ];
         $searchForm = $this->createForm(SearchForm::class, $searchData);
         $searchForm->handleRequest($request);
-        $sorties=$sortieRepository->findSorties ($searchData, $participantRepository);
+        $searchData = $searchForm->getData();
+        $sorties=$sortieRepository->searchSortiesAvecFiltres($searchData, $user);
+
         return $this->render('sortie/afficher.html.twig', [
             'searchForm' => $searchForm->createView(),
             "sorties"=>$sorties

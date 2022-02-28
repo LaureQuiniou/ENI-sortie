@@ -26,7 +26,7 @@ class SearchForm extends AbstractType
                 'required' => false,
             ])
             ->add('motClef', SearchType::class, [
-                'label' => 'Mots-clefs',
+                'label' => 'Le nom de la sortie contient : ',
                 'required' => false,
             ])
             ->add('dateDebut', DateType::class, [
