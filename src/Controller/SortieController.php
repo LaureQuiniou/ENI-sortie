@@ -7,6 +7,7 @@ use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Participant;
 use App\Entity\Sortie;
+use App\Form\SearchForm;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
 use App\Repository\LieuRepository;
@@ -31,6 +32,28 @@ class SortieController extends AbstractController
         return $this->render('sortie/afficher.html.twig', [
             "sorties"=>$sorties
 
+        ]);
+    }
+    /**
+     * @Route("/ListeSorties", name="sorties_liste")
+     */
+    public function list(Request $request, SortieRepository $sortieRepository, ParticipantRepository $participantRepository): Response
+    {
+        //valeurs par défaut du formulaire de recherche
+        //sous forme de tableau associatif, car le form n'est pas associée à une entité
+        $searchData = [
+            'est_inscrit' => true,
+            'pas_inscrit' => true,
+            'est_organisateur' => true,
+            'dateDebut' => new \DateTime("- 1 month"),
+            'dateFin' => new \DateTime("+ 1 year"),
+        ];
+        $searchForm = $this->createForm(SearchForm::class, $searchData);
+        $searchForm->handleRequest($request);
+        $sorties=$sortieRepository->findSorties ($searchData, $participantRepository);
+        return $this->render('sortie/afficher.html.twig', [
+            'searchForm' => $searchForm->createView(),
+            "sorties"=>$sorties
         ]);
     }
 
