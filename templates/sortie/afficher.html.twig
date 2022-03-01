@@ -77,7 +77,7 @@
                                         {% set inscrit = true %}
                                     {% endif %}
                                 {% endfor%}
-                                {% if s.dateLimiteInscription <= "now" %}
+                                {% if s.dateLimiteInscription >= "now" %}
                                     {% if not inscrit and s.etat.libelle is same as("Ouverte") and s.participants|length < s.nbInscriptionsMax  %}
                                      <a href="{{ path('sortie_inscription', {id:s.id}) }}">S'inscrire</a>
                                     {% endif %}
