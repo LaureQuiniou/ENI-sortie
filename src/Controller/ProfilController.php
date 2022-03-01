@@ -57,23 +57,10 @@ class ProfilController extends AbstractController
                     $user->setPassword($request->request->get('newPassword'));
                 }
 
-                /*Vérification photo
-                $photo = $profilForm->get('photoFile')->getData();
-
-                if ($photo)
-                {
-                  $NewfileName = $user->getNom()."-".$user->getId().".".$photo->guessExtension();
-                }
-
-                $photo->move($this->getParameter('image_profil'), $NewfileName);
-                $user->setPhoto($NewfileName);
-                */
-
                 $entityManager->persist($user);
                 $entityManager->flush();
-                $this->addFlash('success','Youpi !!');
-
-                return $this->redirectToRoute('sortie_afficher');
+                $this->addFlash('success','Vos modifications ont bien été prises en compte');
+                return $this->redirectToRoute('mon_profil');
             }
 
       return $this->render('profil/modifierProfil.html.twig',[

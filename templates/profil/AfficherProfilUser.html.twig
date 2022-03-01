@@ -11,11 +11,11 @@
         <h2>{{ app.user.pseudo }}</h2>
         <div class="div_profil">
             <div class="col-md-9">
-                <p>Prénom : {{ app.user.prenom }}</p>
-                <p>Nom : {{ app.user.nom }}</p>
-                <p>Téléphone : {{ app.user.telephone }}</p>
-                <p>Email : {{ app.user.email }}</p>
-                <p>Campus : {{ app.user.campus.nom }}</p>
+                <p>Prénom :  {{ app.user.prenom }}</p>
+                <p>Nom :  {{ app.user.nom }}</p>
+                <p>Téléphone :  {{ app.user.telephone }}</p>
+                <p>Email :  {{ app.user.email }}</p>
+                <p>Campus :  {{ app.user.campus.nom }}</p>
             </div>
 
            <div class="col-md-3">
@@ -27,7 +27,7 @@
         </div>
 
         {# <img src="{{ vich_uploader_asset(article, 'imageFile')|imagine_filter('article')  }}" alt="Image"> #}
-        <a href="{{ path('sortie_afficher') }}"><button class="btn btn-lg btn-primary">Retour</button></a>
+        <a href="{{ path('sorties_afficher') }}"><button class="btn btn-lg btn-primary">Retour</button></a>
         <a href="{{ path('profil_modifier') }}"><button class="btn btn-lg btn-primary">Modifier</button></a>
     </section>
 

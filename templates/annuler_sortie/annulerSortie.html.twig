@@ -1,18 +1,31 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/annuler_sortie.css') }}">
+{% endblock %}
+
 {% block title %}Annuler une sortie{% endblock %}
 
 {% block body %}
-    <section>
         <h2>Annuler une sortie</h2>
-        <div>
-            <p>Nom de la sortie : {{ sorties.nom}}</p>
-            <p>Date de la sortie : {{ sorties.dateHeureDebut.format('m/d/Y') }}</p>
-            <p>Campus : {{ sorties.campus.nom }}</p>
-            <p>Lieu : {{ sorties.campus.nom }}</p>
-            <p>Motif : </p>
+        <div id="annuler_sortie">
+            <div>
+                <p>Nom de la sortie : {{ sortieChoisie.nom}}</p>
+                <p>Date de la sortie : {{ sortieChoisie.dateHeureDebut.format('m/d/Y') }}</p>
+                <p>Campus : {{ sortieChoisie.campus.nom }}</p>
+                <p>Lieu : {{ sortieChoisie.campus.nom }}</p>
+            </div>
+            <div>
+                {{ form_start(annulationForm) }}
+                {{ form_row(annulationForm.motifAnnulation) }}
+                {% if sortieChoisie.dateHeureDebut > date()  %}
+                    <button type="submit" class=" btn btn-lg btn-primary">Enregistrer</button>
+                    <button type="reset" class="btn btn-lg btn-primary">Annuler</button>
+                {% else %}
+                    <p> Cette sortie ne peut être annulée car la date de cette sortie est commencée ou passée </p>
+                {% endif %}
+                {{ form_end(annulationForm) }}
+            </div>
         </div>
-        <button class="btn btn-lg btn-primary">Enregistrer</button>
-        <button class="btn btn-lg btn-primary">Annuler</button>
-    </section>
+
 {% endblock %}

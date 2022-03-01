@@ -74,6 +74,27 @@ class Sortie
     private $organisateur;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $motifAnnulation;
+
+    /**
+     * @return mixed
+     */
+    public function getMotifAnnulation()
+    {
+        return $this->motifAnnulation;
+    }
+
+    /**
+     * @param mixed $motifAnnulation
+     */
+    public function setMotifAnnulation($motifAnnulation): void
+    {
+        $this->motifAnnulation = $motifAnnulation;
+    }
+
+    /**
      * @ORM\ManyToMany(targetEntity=Participant::class, inversedBy="sorties", cascade={"persist"})
      */
     private $participants;
