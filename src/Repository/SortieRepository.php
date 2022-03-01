@@ -49,6 +49,8 @@ class SortieRepository extends ServiceEntityRepository
             ->addSelect('o');
         $queryBuilder->leftJoin('s.campus','c')
             ->addSelect('c');
+        $queryBuilder->andWhere('s.dateHeureDebut >= :today1mois')
+            ->setParameter('today1mois', new \DateTime("- 1 month"));
 
         //filtre par campus
         if (!empty($searchData['campus'])){

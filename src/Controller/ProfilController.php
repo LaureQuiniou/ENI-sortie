@@ -60,7 +60,7 @@ class ProfilController extends AbstractController
                 $entityManager->persist($user);
                 $entityManager->flush();
                 $this->addFlash('success','Youpi !!');
-                return $this->redirectToRoute('sortie_afficher');
+                return $this->redirectToRoute('sorties_afficher');
             }
 
       return $this->render('profil/modifierProfil.html.twig',[
