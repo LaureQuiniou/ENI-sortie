@@ -32,18 +32,18 @@ class SearchForm extends AbstractType
             ->add('dateDebut', DateType::class, [
                 'label' => 'Entre le',
                 'required' => false,
-                'html5'=>false,
+                'html5'=>true,
                 'widget' => 'single_text',
                 'attr' => ['class' => 'datepicker'],
-                'format' => 'dd/MM/yyyy'
+                //'format' => 'dd/MM/yyyy'
             ])
             ->add('dateFin', DateType::class, [
                 'label' => 'Et le',
                 'required' => false,
-                'html5'=>false,
+                'html5'=>true,
                 'widget' => 'single_text',
                 'attr' => ['class' => 'datepicker'],
-                'format' => 'dd/MM/yyyy'
+                //'format' => 'dd/MM/yyyy'
             ])
             ->add('est_organisateur', CheckboxType::class, [
                 'label' => "Sorties dont je suis l'organisateur/trice",
