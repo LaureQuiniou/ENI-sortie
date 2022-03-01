@@ -33,3 +33,7 @@ form{
     flex-wrap: wrap;
     gap: 5px 35px;
 }
+
+datalist {
+    display: block;
+}

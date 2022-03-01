@@ -10,14 +10,17 @@
 
 {% block body %}
     <h2>Créer une nouvelle sortie</h2>
-    {{ form_start(sortieForm) }}
+    {{ form_start(sortieForm, {attr: {class: 'js-filter-villes'}}) }}
 
-        <div class="formulaire">
+        <div class="formulaire js-filter">
             {%  include 'sortie/inc/_formulairePartieSortie.html.twig' with {sortieForm: sortieForm} only%}
 
             <div>
                 {{ form_label(sortieForm.lieu.ville) }}
-                {{ form_widget(sortieForm.lieu.ville) }}
+                {{ form_widget(sortieForm.lieu.ville,{attr:{'class': 'form-ville'}}) }}
+                <div class="div-ville">
+                {% include 'sortie/inc/_formulairePartieVille.html.twig' %}
+                </div>
                 {{ form_errors(sortieForm.lieu.ville) }}
                 {{ form_label(sortieForm.lieu.nom) }}
                 {{ form_widget(sortieForm.lieu.nom) }}
@@ -45,5 +48,5 @@
     {{ form_end(sortieForm) }}
 {% endblock %}
 
-
+{% block js_perso %}{{ asset('js/filtres.js')}} {% endblock %}
 
