@@ -38,7 +38,7 @@ class SortieController extends AbstractController
         ]);
     }*/
     /**
-     * @Route("/sortie", name="sortie_afficher")
+     * @Route("/sortie", name="sorties_afficher")
      */
     public function list(Request $request, SortieRepository $sortieRepository, UserInterface $user): Response
     {
@@ -86,14 +86,15 @@ class SortieController extends AbstractController
                 'sortieForm' => $sortieForm->createView()
         ]);
     }
+
     /**
      * @Route("/inscription/{id}", name="sortie_inscription", methods={"GET"})
      */
     public function inscriptionSortie(int $id, EntityManagerInterface $entityManager, SortieRepository $sortieRepository, ParticipantRepository $participantRepository, UserInterface $user): Response
     {
         $sortieEnCours=$sortieRepository->find($id); // Trouver la sortie actuelle en cherchant son id
-       $participant=new Participant();
-       $participant=$participantRepository->findOneBy(['email'=>$this->getUser()->getUserIdentifier()]);
+        $participant=new Participant();
+        $participant=$participantRepository->findOneBy(['email'=>$this->getUser()->getUserIdentifier()]);
         $sortieEnCours->addParticipant($participant); //trouver le user actuel -> ajouter le participant à la sortie
 
         //sauvegarde en BDD
@@ -130,7 +131,6 @@ class SortieController extends AbstractController
         $sortieEnCours=$sortieRepository->find($id); // Trouver la sortie actuelle en cherchant son id
         $participant=new Participant();
         $participant=$participantRepository->findOneBy(['email'=>$this->getUser()->getUserIdentifier()]);
-        dump($sortieEnCours);
         $sortieEnCours->removeParticipant($participant); //trouver le user actuel -> ajouter le participant à la sortie
 
         //sauvegarde en BDD
