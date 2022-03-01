@@ -32,7 +32,7 @@
             <table>
                 <thead class="en-tête">
                 <tr>
-                    <td>Nom de la sortie</td>
+                    <td>Nom de la sortie </td>
                     <td>Date de la sortie</td>
                     <td>Clôture</td>
                     <td>Inscrits/places</td>
@@ -70,16 +70,18 @@
                                 <a href="{{ path('afficher_une_sortie', {id:s.id}) }}">Afficher</a>
                             {% endif %}
 
-                            <!--S'INSCRIRE : 3 conditions: ouvert, de la place, et pas déjà inscrit -->
-                            {% set inscrit = false %}
-                            {% for p in s.participants  %}
-                                {% if p is same as app.user %}
-                                    {% set inscrit = true %}
+                                <!--S'INSCRIRE : 3 conditions: ouvert, de la place, et pas déjà inscrit -->
+                                {% set inscrit = false %}
+                                {% for p in s.participants  %}
+                                    {% if p is same as app.user %}
+                                        {% set inscrit = true %}
+                                    {% endif %}
+                                {% endfor%}
+                                {% if s.dateLimiteInscription <= "now" %}
+                                    {% if not inscrit and s.etat.libelle is same as("Ouverte") and s.participants|length < s.nbInscriptionsMax  %}
+                                     <a href="{{ path('sortie_inscription', {id:s.id}) }}">S'inscrire</a>
+                                    {% endif %}
                                 {% endif %}
-                            {% endfor%}
-                            {% if not inscrit and s.etat.libelle is same as("Ouverte") and s.participants|length < s.nbInscriptionsMax  %}
-                                <a href="{{ path('sortie_inscription', {id:s.id}) }}">S'inscrire</a>
-                            {% endif %}
 
                             <!--SE DESISTER 2 conditions : état pas "en cours et "en création" , s'être inscrit -->
                             {% set desister = false %}
@@ -96,15 +98,17 @@
                             <!--PUBLIER , MODIFIER 2 conditions : état "en création" et être organisateur -->
                             {% if s.organisateur is same as(app.user) %}
                                 {% if s.etat.libelle is same as("Création") %}
-                                    <a href="{{ path('afficher_une_sortie', {id:s.id} )}}">Publier</a>
+                                    <a href="{{ path('modifier_sortie', {id:s.id} )}}">Publier</a>
                                     <a href="{{ path('modifier_sortie', {id:s.id}) }}">Modifier</a>
                                 {% endif %}
                             {% endif %}
 
                             <!--ANNULER : 1 condition état "ouverte" et être organisateur  -->
                             {% if s.organisateur is same as(app.user) %}
-                                {% if s.etat.libelle is same as("Ouverte") %}
-                                    <a href="{{ path('sortie_annuler', {id:s.id}) }}">Annuler</a>
+                                {% if s.dateHeureDebut < "now" %}
+                                    {% if s.etat.libelle is same as("Ouverte") %}
+                                        <a href="{{ path('sortie_annuler', {id:s.id}) }}">Annuler</a>
+                                    {% endif %}
                                 {% endif %}
                             {% endif %}
                         {% endif %}
