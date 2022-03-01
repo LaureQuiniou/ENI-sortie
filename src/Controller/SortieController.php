@@ -7,6 +7,7 @@ use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Participant;
 use App\Entity\Sortie;
+use App\Entity\Ville;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
 use App\Repository\LieuRepository;
@@ -15,8 +16,10 @@ use App\Repository\LieuRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 
+use App\Repository\VilleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -37,12 +40,23 @@ class SortieController extends AbstractController
     /**
      * @Route("/cree_une_sortie", name="sortie_creer")
      */
-    public function creerSortie(Request $request, EntityManagerInterface $entityManager, EtatRepository $etatRepository, LieuRepository $lieuRepository, ParticipantRepository $participantRepository): Response
+    public function creerSortie(Request $request, EntityManagerInterface $entityManager, VilleRepository $villeRepository,
+                                LieuRepository $lieuRepository,ParticipantRepository $participantRepository, EtatRepository $etatRepository): Response
     {
+
         $sortie = new Sortie();
         $organisateur = $participantRepository->findOneBy(['email'=>$this->getUser()->getUserIdentifier()]);
+        $villes=[];
+
         $sortieForm = $this->createForm(SortieType::class, $sortie);
         $sortieForm->handleRequest($request);
+
+        if($request->get('ajax')){
+            $data=$request->get('data');
+            $villes = $villeRepository->findVille($data);
+            return new JsonResponse(['content'=> $this->renderView('sortie/inc/_formulairePartieVille.html.twig',['villes'=>$villes])]);
+
+        }
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
             $lieu = $lieuRepository->findOneBy(['nom'=>'Le chat Noir']);
@@ -55,10 +69,28 @@ class SortieController extends AbstractController
             $entityManager->flush();
         }
 
+
         return $this->render('sortie/creer_une_sortie.html.twig', [
-                'sortieForm' => $sortieForm->createView()
+                'sortieForm' => $sortieForm->createView(),'villes' => $villes
         ]);
     }
+
+    /**
+     * @Route("/cree_une_sortie/post/ville", name="sortie_creer_post_ville")
+     */
+    public function postVille(Request $request, VilleRepository $villeRepository)
+    {
+        if ($request->get('ajax')) {
+            $ville=$request->get('ville');
+            //$villes = $villeRepository->findVille($ville);
+            $villes=['Nantes', 'Quimper'];
+            return new JsonResponse(['content' => ['villes' => $villes]]);
+        }
+    }
+
+
+
+
     /**
      * @Route("/inscription/{id}", name="sortie_inscription", methods={"GET"})
      */
