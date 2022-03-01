@@ -11,24 +11,28 @@
 {% block body %}
 
     <h2>Mon profil</h2>
+        {{ form_start(profilForm) }}
+        <div class="col-md-9">
+            {{ form_row(profilForm.pseudo, {'value': app.user.pseudo}) }}
+            {{ form_row(profilForm.prenom, {'value': app.user.prenom}) }}
+            {{ form_row(profilForm.nom, {'value': app.user.nom}) }}
+            {{ form_row(profilForm.telephone, {'value': app.user.telephone}) }}
+            {{ form_row(profilForm.email, {'value': app.user.email}) }}
+        </div>
+        <div class="col-md-9">
+            {{ form_row(profilForm.campus) }}
+            {{ form_row(profilForm.newPassword) }}
+            {{ form_row(profilForm.photo) }}
+            <div id="btn_modifier_profil">
+                <button type="submit" class="btn btn-lg btn-primary">Enregistrer</button>
+                <button type="reset" class="btn btn-lg btn-primary">Annuler</button>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <img class="img_profil" src="{{ asset(app.user.photo) }}">
+        </div>
 
-    {{ form_start(profilForm) }}
-    <div>
-        {{ form_row(profilForm.pseudo, {'value': app.user.pseudo}) }}
-        {{ form_row(profilForm.prenom, {'value': app.user.prenom}) }}
-        {{ form_row(profilForm.nom, {'value': app.user.nom}) }}
-        {{ form_row(profilForm.telephone, {'value': app.user.telephone}) }}
-    </div>
-    <div>
-        {{ form_row(profilForm.email, {'value': app.user.email}) }}
-        {{ form_row(profilForm.campus) }}
-        {{ form_row(profilForm.newPassword) }}
-        {{ form_row(profilForm.photo) }}
-    </div>
-    <div>
-        <button type="submit" class=" btn btn-lg btn-primary">Enregistrer</button>
-        <button type="reset" class="btn btn-lg btn-primary">Annuler</button>
-    </div>
+
     {{ form_end(profilForm) }}
 
 {% endblock %}

@@ -6,7 +6,8 @@ section{
 
 h2{
     margin-top: 10px;
-    margin-bottom: 5%;
+    margin-bottom: 7%;
+    text-align: center;
 }
 
 p{
@@ -22,4 +23,8 @@ p{
 {
     height: 300px;
     padding-left: 100px;
+}
+
+#btn_modifier_profil{
+    margin-top: 40px;
 }
