@@ -109,6 +109,7 @@ class AppFixtures extends Fixture
         $user1->setTelephone('01.35.45.78.65');
         $user1->setActif(true);
         $user1->setCampus($chartres);
+        $user1->setPhoto('img/Avatar/avataaars(1).png');
         $user2->setNom('Duprès');
         $user2->setPrenom('Natalie');
         $user2->setEmail('user@eni.com');
@@ -118,6 +119,7 @@ class AppFixtures extends Fixture
         $user2->setTelephone('05.45.78.36.67');
         $user2->setActif(true);
         $user2->setCampus($stHerblain);
+        $user2->setPhoto('img/Avatar/avataaars(2).png');
         $user3->setNom('Le Kerguerec');
         $user3->setPrenom('Yohann');
         $user3->setEmail('organisateur@eni.com');
@@ -127,6 +129,7 @@ class AppFixtures extends Fixture
         $user3->setTelephone('07.32.98.54.22');
         $user3->setActif(true);
         $user3->setCampus($quinper);
+        $user3->setPhoto('img/Avatar/avataaars.png');
         $user4->setNom('Marteau');
         $user4->setPrenom('Pierre');
         $user4->setEmail('participant@eni.com');

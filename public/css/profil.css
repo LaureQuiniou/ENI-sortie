@@ -12,3 +12,14 @@ h2{
 p{
     padding-bottom: 20px;
 }
+
+.div_profil
+{
+    display: flex;
+}
+
+.img_profil
+{
+    height: 300px;
+    padding-left: 100px;
+}

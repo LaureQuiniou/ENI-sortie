@@ -7,6 +7,7 @@ use App\Entity\Participant;
 use phpDocumentor\Reflection\PseudoType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -46,6 +47,12 @@ class ProfilType extends AbstractType
                 'label'=> 'campus',
                 'class'=> Campus::class,
                 'choice_label' => 'nom'
+            ])
+            ->add('photo', FileType::class,[
+                'label' => 'photo de profil',
+                'mapped'=> false,
+                'multiple' => false,
+                'required' => false
             ])
         ;
     }
