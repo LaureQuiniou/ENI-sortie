@@ -63,7 +63,7 @@
                     <!-- ACTIONS -->
                     <td>
                         {% if not s.motifAnnulation is same as (NULL) %}
-                            <p> SORTIE ANNULEE </p>
+                            <p> SORTIE ANNULEE ({{ s.motifAnnulation }})</p>
                         {% else %}
                             <!--AFFICHER : 2 conditions négatives: pas "en création" et pas organisateur -->
                             {% if not s.etat.libelle is same as("Création")  %}
