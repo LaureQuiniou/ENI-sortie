@@ -13,28 +13,29 @@
     </div>
     <h3>Filtrer les sorties </h3>
     <section>
-
         <div>
             {{ form_start(searchForm) }}
-            {{ form_row(searchForm.campus) }}
-            {{ form_row(searchForm.motClef) }}
+           <div class="haut_filtre">
+               {{ form_row(searchForm.campus) }}
+               {{ form_row(searchForm.motClef) }}
+           </div>
 
-            {{ form_row(searchForm.est_organisateur) }}
-            {{ form_row(searchForm.est_incrit) }}
-            {{ form_row(searchForm.pas_inscrit) }}
-            {{ form_row(searchForm.sorties_passees) }}
+            <div class="checkbox_filtre">
+                {{ form_row(searchForm.est_organisateur) }}
+                {{ form_row(searchForm.est_incrit) }}
+                {{ form_row(searchForm.pas_inscrit) }}
+                {{ form_row(searchForm.sorties_passees) }}
+            </div>
         </div>
-        <div class="deuxColonnes">
-        <div class="date">
+        <div class="deuxDates">
             {{ form_row(searchForm.dateDebut) }}
-        <div class="date">
-            {{ form_row(searchForm.dateFin) }}
+            <div class="margin_date">
+                {{ form_row(searchForm.dateFin) }}
+            </div>
+            <div class="bouton_rechercher">
+                {{ form_end(searchForm) }}
+            </div>
         </div>
-        </div>
-        <div class="bouton">
-            {{ form_row(searchForm.rechercher) }}
-        </div>
-        {{ form_end(searchForm) }}
     </section>
     <div class="scroller">
             <table>
