@@ -13,8 +13,12 @@
         <div>
             {{ form_start(annulationForm) }}
             {{ form_row(annulationForm.motifAnnulation) }}
+            {% if sortieChoisie.dateHeureDebut > date()  %}
             <button type="submit" class=" btn btn-lg btn-primary">Enregistrer</button>
             <button type="reset" class="btn btn-lg btn-primary">Annuler</button>
+            {% else %}
+                <p> Cette sortie ne peut être annulée car la date de cette sortie est commencée ou passée </p>
+            {% endif %}
             {{ form_end(annulationForm) }}
         </div>
 {% endblock %}
