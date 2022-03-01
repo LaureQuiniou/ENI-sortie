@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 //use Vich\UploaderBundle\Entity\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Symfony\Component\HttpFoundation\File\File;
+//use Symfony\Component\HttpFoundation\File\File; A mettre ou a enlever?
 //use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -282,34 +282,28 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function setPhotoFile(File $photo = null)
+    {
+        $this->photoFile = $photo;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($photo) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getPhotoFile()
+    {
+        return $this->photoFile;
+    }
+
     public function __construct()
     {
         $this->sorties = new ArrayCollection();
     }
 
-    public function getPhotoFile(): ?File
-    {
-        return $this->photoFile;
-    }
-
-    /**
-     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
-     * of 'UploadedFile' is injected into this setter to trigger the update. If this
-     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
-     * must be able to accept an instance of 'File' as the bundle will inject one here
-     * during Doctrine hydration.
-     *
-     * @param File|Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
-     */
-    public function setPhotoFile(File $photoFile): self
-    {
-        $this->photoFile = $photoFile;
-        if ($photoFile) { // changer ca? => if ($this->imageFile instanceof UploadedFile)
-            // if 'updatedAt' is not defined in your entity, use another property
-            $this->updatedAt = new \DateTime('now');
-        }
-
-        return $this;
-    }
 
     }
