@@ -89,12 +89,11 @@ class SortieController extends AbstractController
     /**
      * @Route("/inscription/{id}", name="sortie_inscription", methods={"GET"})
      */
-    public function inscriptionSortie(int $id, EntityManagerInterface $entityManager, SortieRepository $sortieRepository, ParticipantRepository $participantRepository): Response
+    public function inscriptionSortie(int $id, EntityManagerInterface $entityManager, SortieRepository $sortieRepository, ParticipantRepository $participantRepository, UserInterface $user): Response
     {
         $sortieEnCours=$sortieRepository->find($id); // Trouver la sortie actuelle en cherchant son id
-        $participant=new Participant();
-        $participant=$participantRepository->findOneBy(['email'=>$this->getUser()->getUserIdentifier()]);
-        dump($sortieEnCours);
+       $participant=new Participant();
+       $participant=$participantRepository->findOneBy(['email'=>$this->getUser()->getUserIdentifier()]);
         $sortieEnCours->addParticipant($participant); //trouver le user actuel -> ajouter le participant à la sortie
 
         //sauvegarde en BDD
@@ -105,20 +104,28 @@ class SortieController extends AbstractController
         $this->addFlash('succes', 'Tu es bien inscrit !');
 
         //on réaffiche les sorties
-        $sorties=$sortieRepository->findSorties();
+        //valeurs par défaut du formulaire de recherche
+        $searchData = [
+            'est_inscrit' => false,
+            'pas_inscrit' => false,
+            'est_organisateur' => false,
+            'sorties_passees'=>false,
+        ];
+        $searchForm = $this->createForm(SearchForm::class, $searchData);
+        $sorties=$sortieRepository->searchSortiesAvecFiltres($searchData, $user);
 
         //on redirige
         return $this->render('sortie/afficher.html.twig', [
-            "sorties"=>$sorties,
-            //Je rajoute ca???  'id'=>$id->getId()
-
+            'searchForm' => $searchForm->createView(),
+            "sorties"=>$sorties
         ]);
+
     }
 
     /**
      * @Route("/desister/{id}", name="sortie_desister", methods={"GET"})
      */
-    public function desisterSortie(int $id, EntityManagerInterface $entityManager, SortieRepository $sortieRepository, ParticipantRepository $participantRepository): Response
+    public function desisterSortie(int $id, EntityManagerInterface $entityManager, SortieRepository $sortieRepository, ParticipantRepository $participantRepository,UserInterface $user): Response
     {
         $sortieEnCours=$sortieRepository->find($id); // Trouver la sortie actuelle en cherchant son id
         $participant=new Participant();
@@ -134,13 +141,20 @@ class SortieController extends AbstractController
         $this->addFlash('succes', 'Tu ne participeras plus, dommage !');
 
         //on réaffiche les sorties
-        $sorties=$sortieRepository->findSorties();
+        //valeurs par défaut du formulaire de recherche
+        $searchData = [
+            'est_inscrit' => false,
+            'pas_inscrit' => false,
+            'est_organisateur' => false,
+            'sorties_passees'=>false,
+        ];
+        $searchForm = $this->createForm(SearchForm::class, $searchData);
+        $sorties=$sortieRepository->searchSortiesAvecFiltres($searchData, $user);
 
         //on redirige
         return $this->render('sortie/afficher.html.twig', [
-            "sorties"=>$sorties,
-            //Je rajoute ca???  'id'=>$id->getId()
-
+            'searchForm' => $searchForm->createView(),
+            "sorties"=>$sorties
         ]);
     }
 }
