@@ -11,23 +11,31 @@
     <div class="FlexInfoDateUser">
         <p>Participant : {{ app.user.nom }}</p>
     </div>
-    <div>
-        <h2>Filtrer les sorties </h2>
+    <h3>Filtrer les sorties </h3>
+    <section>
+
         <div>
             {{ form_start(searchForm) }}
             {{ form_row(searchForm.campus) }}
             {{ form_row(searchForm.motClef) }}
-            <div class="row">
-                {{ form_row(searchForm.dateDebut) }}
-                {{ form_row(searchForm.dateFin) }}
-            </div>
+
             {{ form_row(searchForm.est_organisateur) }}
             {{ form_row(searchForm.est_incrit) }}
             {{ form_row(searchForm.pas_inscrit) }}
             {{ form_row(searchForm.sorties_passees) }}
-            {{ form_end(searchForm) }}
         </div>
-    </div>
+        <div class="deuxColonnes">
+        <div class="date">
+            {{ form_row(searchForm.dateDebut) }}
+        <div class="date">
+            {{ form_row(searchForm.dateFin) }}
+        </div>
+        </div>
+        <div class="bouton">
+            {{ form_row(searchForm.rechercher) }}
+        </div>
+        {{ form_end(searchForm) }}
+    </section>
     <div class="scroller">
             <table>
                 <thead class="en-tête">
@@ -116,10 +124,11 @@
                 </tr>
                 {% endfor %}
                 </tbody>
-                <div class="boutons">
-                    <a href="{{ path('sortie_creer') }}"> <button type="submit" class="btn btn-lg btn-primary">Créer une sortie</button>  </a>
-                </div>
             </table>
+         </div>
+
+    <div class="boutons">
+        <a href="{{ path('sortie_creer') }}"> <button type="submit" class="btn btn-lg btn-primary">Créer une sortie</button>  </a>
     </div>
 {% endblock %}
 
