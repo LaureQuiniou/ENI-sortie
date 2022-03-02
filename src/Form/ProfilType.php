@@ -49,10 +49,10 @@ class ProfilType extends AbstractType
                 'class'=> Campus::class,
                 'choice_label' => 'nom'
             ])
+            //J'atoute un champs photo qui n'est pas lié à la BDD, 'multiple' => false, Quand SELECT ou CHECkBOX
             ->add('photoFile', VichImageType::class,[
                 'label' => 'photo de profil',
-                'mapped'=> false, //LAISSER FALSE Par défault c'est true
-                //'multiple' => false, Quand SELECT ou CHECkBOX
+                'mapped'=> false,
                 'required' => false
             ])
         ;
@@ -62,6 +62,7 @@ class ProfilType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Participant::class,
+            "allow_extra_fields" => true,
         ]);
     }
 }

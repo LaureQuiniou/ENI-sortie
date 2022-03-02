@@ -17,10 +17,10 @@
                     <p>Email :  {{ participant.email }}</p>
                     <p>Campus :  {{ participant.campus.nom }}</p>
                 </div>
-                {#  <div class="col-md-3">#}
-                    {#     <img class="img_profil" src="{{ asset(participant.photo) }}">#}
-                    {#  </div>#}
-                {#</div>#}
+                    <div class="col-md-3">
+                        <img class="img_profil" src="{{ asset('img/Avatar/'~app.user.photo) }}">
+                    </div>
+                </div>
 
             {# <img src="{{ vich_uploader_asset(article, 'imageFile')|imagine_filter('article')  }}" alt="Image"> #}
             <a href="{{ path('sorties_afficher') }}"><button class="btn btn-lg btn-primary">Retour</button></a>
