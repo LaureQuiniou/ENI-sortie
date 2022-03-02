@@ -34,6 +34,23 @@ form{
     gap: 5px 35px;
 }
 
-datalist {
-    display: block;
+.add{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#iconAdd{
+    height:30px;
+    margin-top: 12px;
+}
+
+label[for=sortie_lieu_nom]{
+    flex:1;
+}
+
+label.required:after {
+    content: "*";
+    color: red;
 }
