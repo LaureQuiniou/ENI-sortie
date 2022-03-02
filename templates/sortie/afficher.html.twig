@@ -11,23 +11,32 @@
     <div class="FlexInfoDateUser">
         <p>Participant : {{ app.user.nom }}</p>
     </div>
-    <div>
-        <h2>Filtrer les sorties </h2>
+    <h3>Filtrer les sorties </h3>
+    <section>
         <div>
             {{ form_start(searchForm) }}
-            {{ form_row(searchForm.campus) }}
-            {{ form_row(searchForm.motClef) }}
-            <div class="row">
-                {{ form_row(searchForm.dateDebut) }}
+           <div class="haut_filtre">
+               {{ form_row(searchForm.campus) }}
+               {{ form_row(searchForm.motClef) }}
+           </div>
+
+            <div class="checkbox_filtre">
+                {{ form_row(searchForm.est_organisateur) }}
+                {{ form_row(searchForm.est_incrit) }}
+                {{ form_row(searchForm.pas_inscrit) }}
+                {{ form_row(searchForm.sorties_passees) }}
+            </div>
+        </div>
+        <div class="deuxDates">
+            {{ form_row(searchForm.dateDebut) }}
+            <div class="margin_date">
                 {{ form_row(searchForm.dateFin) }}
             </div>
-            {{ form_row(searchForm.est_organisateur) }}
-            {{ form_row(searchForm.est_incrit) }}
-            {{ form_row(searchForm.pas_inscrit) }}
-            {{ form_row(searchForm.sorties_passees) }}
-            {{ form_end(searchForm) }}
+            <div class="bouton_rechercher">
+                {{ form_end(searchForm) }}
+            </div>
         </div>
-    </div>
+    </section>
     <div class="scroller">
             <table>
                 <thead class="en-tête">
@@ -77,7 +86,7 @@
                                         {% set inscrit = true %}
                                     {% endif %}
                                 {% endfor%}
-                                {% if s.dateLimiteInscription <= "now" %}
+                                {% if s.dateLimiteInscription >= "now" %}
                                     {% if not inscrit and s.etat.libelle is same as("Ouverte") and s.participants|length < s.nbInscriptionsMax  %}
                                      <a href="{{ path('sortie_inscription', {id:s.id}) }}">S'inscrire</a>
                                     {% endif %}
@@ -105,7 +114,7 @@
 
                             <!--ANNULER : 1 condition état "ouverte" et être organisateur  -->
                             {% if s.organisateur is same as(app.user) %}
-                                {% if s.dateHeureDebut < "now" %}
+                                {% if s.dateHeureDebut > "now" %}
                                     {% if s.etat.libelle is same as("Ouverte") %}
                                         <a href="{{ path('sortie_annuler', {id:s.id}) }}">Annuler</a>
                                     {% endif %}
@@ -116,10 +125,11 @@
                 </tr>
                 {% endfor %}
                 </tbody>
-                <div class="boutons">
-                    <a href="{{ path('sortie_creer') }}"> <button type="submit" class="btn btn-lg btn-primary">Créer une sortie</button>  </a>
-                </div>
             </table>
+         </div>
+
+    <div class="boutons">
+        <a href="{{ path('sortie_creer') }}"> <button type="submit" class="btn btn-lg btn-primary">Créer une sortie</button>  </a>
     </div>
 {% endblock %}
 

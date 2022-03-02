@@ -43,6 +43,11 @@ class Lieu
      */
     private $ville;
 
+    public function __toString()
+    {
+        return $this->nom;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -7,11 +7,12 @@ table {
 thead,tfoot {
     background-color: #171B45;
     color: white;
-    font-size: 20px;
+    font-size: 17px;
     font-family: 'Poppins', sans-serif;
+    padding: 5px;
 }
 tbody{
-    font-size: 20px;
+    font-size: 17px;
     position: relative;
 }
 table, th, td {
@@ -19,10 +20,57 @@ table, th, td {
     table-layout: auto;
     table-layout: fixed;
     text-align :center;
+    padding: 5px;
 }
 
 .scroller {
-    height: 300px;
+    height: 400px;
     overflow: scroll;
 }
+
+.haut_filtre{
+    display: flex;
+    flex-direction: column;
+}
+
+.checkbox_filtre{
+    padding-left: 150px;
+}
+
+.deuxDates{
+    display:flex;
+    width: 50%;
+    margin-top: 20px;
+}
+
+.bouton_rechercher{
+    padding : 30px 0 30px 100px;
+}
+
+.margin_date
+{
+    margin-left: 50px;
+}
+form{
+    height: 22vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 5px 35px;
+    width: 200px;
+    max-height: 80vh;
+}
+
+form label{
+    padding-top: 1px;
+    padding-bottom: 1px;
+    display: block;
+    width: 400px;
+}
+
+.boutons
+{
+    padding: 20px;
+}
+
 

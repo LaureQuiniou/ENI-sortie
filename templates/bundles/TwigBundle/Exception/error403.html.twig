@@ -1,0 +1,13 @@
+{%  extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h2>Vous ne pouvez pas passer!</h2>
+    <p><a href="{{ path('sorties_afficher') }}" title="Go back to homepage">Cliquez ici pour revenir à l'accueil !</a></p>
+
+{%  endblock %}
+
+{%  block title %}
+    Error 403 | {{ parent() }}
+
+{%  endblock %}
