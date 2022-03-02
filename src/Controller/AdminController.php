@@ -38,6 +38,7 @@ class AdminController extends AbstractController
         $user = new Participant();
         $user->setActif(true);
         $user->setRoles(['ROLE_USER']);
+        $user->setSuppression(false);
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -49,7 +50,6 @@ class AdminController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -60,19 +60,39 @@ class AdminController extends AbstractController
         ]);
     }
 
-    ///**
-    // * @Route("/admin/supprimerUtilisateur/{id}", name="admin_supprimerUtilisateur")
-    // * @IsGranted("ROLE_ADMIN")
-    // */
-    //public function supprimerUtilisateur(int $id){
-    //        return $this->redirectToRoute('admin_gestionUtilisateurs');
-    //}
-    ///**
-   //  * @Route("/admin/desactiverUtilisateur/{id}", name="admin_desactiverUtilisateur")
-    // * @IsGranted("ROLE_ADMIN")
-    // */
-   // public function desactiverUtilisateur(int $id){
-    //        return $this->redirectToRoute('admin_gestionUtilisateurs');
-   //}
+    /**
+    * @Route("/admin/supprimerUtilisateur/{id}", name="admin_supprimerUtilisateur")
+     * @IsGranted("ROLE_ADMIN")
+    */
+    public function supprimerUtilisateur(Participant $participant, EntityManagerInterface $entityManager){
+
+        if (!$participant->getSuppression()){
+            $participant->setSuppression(true);
+        }
+        $entityManager->persist($participant);
+        $entityManager->flush();
+
+        $this->addFlash('success', "L'utilisateur ".$participant->getPrenom()." ".$participant->getNom()." a bien été supprimé !");
+        return $this->redirectToRoute('admin_gestionUtilisateurs');
+    }
+
+    /**
+    * @Route("/admin/desactiverUtilisateur/{id}", name="admin_desactiverUtilisateur")
+     * @IsGranted("ROLE_ADMIN")
+    */
+   public function desactiverUtilisateur(Participant $participant, EntityManagerInterface $entityManager){
+
+       if ($participant->getActif()){
+           $participant->setActif(false);
+       }else{
+           $participant->setActif(true);
+       }
+       $entityManager->persist($participant);
+       $entityManager->flush();
+
+       $activite=$participant->getActif()? "activé(e)":"désactivé(e)";
+       $this->addFlash('success', "L'utilisateur ".$participant->getPrenom()." ".$participant->getNom()." a bien été $activite !");
+        return $this->redirectToRoute('admin_gestionUtilisateurs');
+   }
 
 }
