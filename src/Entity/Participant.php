@@ -8,12 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-
-//use Vich\UploaderBundle\Entity\File;
-//use Vich\UploaderBundle\Mapping\Annotation as Vich;
-//use Symfony\Component\HttpFoundation\File\File; A mettre ou a enlever?
-//use Symfony\Component\HttpFoundation\File\UploadedFile;
-
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -115,10 +109,15 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private $photo;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
      * @Vich\UploadableField(mapping="image_profil", fileNameProperty="photo")
+     * @var File|null
      */
     private $photoFile;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
 
  ###### GETTER ET SETTER
 
@@ -301,7 +300,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
     // GETTER ET SETTER PHOTO
 
-    public function getPhoto()
+    public function getPhoto() : ?string
     {
         return $this->photo;
     }
@@ -320,30 +319,39 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      * must be able to accept an instance of 'File' as the bundle will inject one here
      * during Doctrine hydration.
      *
-     * @param File|null $photo
      */
-    public function setPhotoFile(?File $photo = null)
+    public function setPhotoFile(?File $photoFile = null) : void
     {
-        $this->photoFile = $photo;
-
+        $this->photoFile = $photoFile;
         // VERY IMPORTANT:
         // It is required that at least one field changes if you are using Doctrine,
         // otherwise the event listeners won't be called and the file is lost
-        if ($photo) {
+        if (null!==$photoFile) {
             // if 'updatedAt' is not defined in your entity, use another property
-            $this->updatedat = new \DateTime('now');
+            $this->updatedAt = new \DateTime('now');
         }
     }
 
-    public function getPhotoFile()
+    public function getPhotoFile():?File
     {
         return $this->photoFile;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 
     public function __construct()
     {
         $this->sorties = new ArrayCollection();
     }
-
 
     }
