@@ -40,7 +40,7 @@ table, th, td {
 .deuxDates{
     display:flex;
     width: 50%;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .bouton_rechercher{
