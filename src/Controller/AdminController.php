@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Participant;
 use App\Form\RegistrationFormType;
+use App\Repository\ParticipantRepository;
 use App\Security\AppAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -14,10 +15,22 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
-class RegistrationController extends AbstractController
+class AdminController extends AbstractController
 {
     /**
-     * @Route("/admin/register", name="app_register")
+     * @Route("/admin/gestionUtilisateurs", name="admin_gestionUtilisateurs")
+     * @IsGranted("ROLE_ADMIN")
+     */
+    public function ListerUtilisateurs(ParticipantRepository $participantRepository): Response
+    {
+        $utilisateurs = $participantRepository->findAll();
+        return $this->render('admin/gestion_administrateur.html.twig', [
+            'utilisateurs'=>$utilisateurs
+        ]);
+    }
+
+    /**
+     * @Route("/admin/register", name="admin_register")
      * @IsGranted("ROLE_ADMIN")
      */
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, UserAuthenticatorInterface $userAuthenticator, AppAuthenticator $authenticator, EntityManagerInterface $entityManager): Response
@@ -31,7 +44,7 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
-            $userPasswordHasher->hashPassword(
+                $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
@@ -39,17 +52,27 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
 
-            return $userAuthenticator->authenticateUser(
-                $user,
-                $authenticator,
-                $request
-            );
+            return $this->redirectToRoute("admin_gestionUtilisateurs");
         }
-
-        return $this->render('registration/register.html.twig', [
+        return $this->render('admin/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
+
+    ///**
+    // * @Route("/admin/supprimerUtilisateur/{id}", name="admin_supprimerUtilisateur")
+    // * @IsGranted("ROLE_ADMIN")
+    // */
+    //public function supprimerUtilisateur(int $id){
+    //        return $this->redirectToRoute('admin_gestionUtilisateurs');
+    //}
+    ///**
+   //  * @Route("/admin/desactiverUtilisateur/{id}", name="admin_desactiverUtilisateur")
+    // * @IsGranted("ROLE_ADMIN")
+    // */
+   // public function desactiverUtilisateur(int $id){
+    //        return $this->redirectToRoute('admin_gestionUtilisateurs');
+   //}
+
 }

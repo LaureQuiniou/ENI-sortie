@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion par les administrateurs {% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/tableau_sortie.css') }}">
+{% endblock %}
+
+{% block body %}
+    <h4>Liste des utilisateurs du site</h4>
+    <a class="btn btn-lg btn-primary" href="{{ path('admin_register') }}">Ajouter un utilisateur</a>
+
+    <table >
+    <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+
+        {% for u in utilisateurs %}
+        <tr>
+            <td>{{ u.nom }}</td>
+            <td>{{ u.prenom }}</td>
+            <td>{{ u.email }}</td>
+            <td><a class="btn btn-primary" href="{{ path('admin_register') }}">Supprimer </a>
+                <a class="btn btn-primary" href="{{ path('admin_register') }}">Désactiver </a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

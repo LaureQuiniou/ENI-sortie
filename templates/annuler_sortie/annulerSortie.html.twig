@@ -10,10 +10,10 @@
         <h2>Annuler une sortie</h2>
         <div id="annuler_sortie">
             <div>
-                <p>Nom de la sortie : {{ sortieChoisie.nom}}</p>
-                <p>Date de la sortie : {{ sortieChoisie.dateHeureDebut.format('m/d/Y') }}</p>
-                <p>Campus : {{ sortieChoisie.campus.nom }}</p>
-                <p>Lieu : {{ sortieChoisie.campus.nom }}</p>
+                <div class="label-sortie"><label>Nom de la sortie :</label><p>{{ sortieChoisie.nom}}</p>
+                <div class="label-sortie"><label>Date et heure de la sortie :</label><p> {{ sortieChoisie.dateHeureDebut.format('m/d/Y') }}</p>
+                <div class="label-sortie"><label>Campus :</label><p>{{ sortieChoisie.campus.nom }}</p>
+                <div class="label-sortie"><label>Lieu :</label><p>{{ sortieChoisie.campus.nom }}</p>
             </div>
             <div>
                 {{ form_start(annulationForm) }}
