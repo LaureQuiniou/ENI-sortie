@@ -8,20 +8,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-
-//use Vich\UploaderBundle\Entity\File;
-//use Vich\UploaderBundle\Mapping\Annotation as Vich;
-//use Symfony\Component\HttpFoundation\File\File; A mettre ou a enlever?
-//use Symfony\Component\HttpFoundation\File\UploadedFile;
-
 use Symfony\Component\HttpFoundation\File\File;
-//use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
  * @Vich\Uploadable()
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"}, message="Il y a déjà un compte avec cet email")
  */
 class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -34,6 +29,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email(message="Votre mail n'est pas valide")
      */
     private $email;
 
@@ -50,11 +46,25 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank (message="Entrez un nom svp!")
+     * @Assert\Length(
+     *     min=3,
+     *     max=50,
+     *     minMessage="Minimum de 3 caractères !",
+     *     maxMessage="Maximum 50 caractères !"
+     *      )
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank (message="Entrez un prénom svp!")
+     * @Assert\Length(
+     *     min=3,
+     *     max=50,
+     *     minMessage="Minimum de 3 caractères !",
+     *     maxMessage="Maximum 50 caractères !"
+     *      )
      */
     private $prenom;
 
@@ -76,6 +86,14 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
+     * @Assert\NotBlank (message="Entrez un pseudo svp !")
+     * @Assert\Length(
+     *     min=3,
+     *     max=50,
+     *     minMessage="Minimum de 3 caractères!",
+     *     maxMessage="Maximum 50 caractères!"
+     *      )
+     * @Assert\Regex(pattern="/^[a-z0-9_-]+$/i", message="Please use only letters, numbers, underscores and dashes !")
      */
     private $pseudo;
 
