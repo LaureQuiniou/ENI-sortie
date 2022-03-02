@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ProfilType extends AbstractType
 {
@@ -48,10 +49,10 @@ class ProfilType extends AbstractType
                 'class'=> Campus::class,
                 'choice_label' => 'nom'
             ])
-            ->add('photo', FileType::class,[
+            ->add('photoFile', VichImageType::class,[
                 'label' => 'photo de profil',
-                'mapped'=> false,
-                'multiple' => false,
+                'mapped'=> false, //A revoir? Par défault c'est true
+                //'multiple' => false, Quand SELECT ou CHECkBOX
                 'required' => false
             ])
         ;

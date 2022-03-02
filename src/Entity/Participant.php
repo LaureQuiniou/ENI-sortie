@@ -9,9 +9,18 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+//use Vich\UploaderBundle\Entity\File;
+//use Vich\UploaderBundle\Mapping\Annotation as Vich;
+//use Symfony\Component\HttpFoundation\File\File; A mettre ou a enlever?
+//use Symfony\Component\HttpFoundation\File\UploadedFile;
+
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
- *
+ * @Vich\Uploadable()
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class Participant implements UserInterface, PasswordAuthenticatedUserInterface
@@ -77,13 +86,17 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
      */
     private $photo;
 
-    public function __construct()
-    {
-        $this->sorties = new ArrayCollection();
-    }
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Vich\UploadableField(mapping="image_profil", fileNameProperty="photo")
+     */
+    private $photoFile;
+
+ ###### GETTER ET SETTER
 
     /**
      * @return ArrayCollection
@@ -262,15 +275,51 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPhoto(): ?string
+    // GETTER ET SETTER PHOTO
+
+    public function getPhoto()
     {
         return $this->photo;
     }
 
-    public function setPhoto(?string $photo): self
+    public function setPhoto(?string $photo): Participant
     {
         $this->photo = $photo;
 
         return $this;
     }
-}
+
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|null $photo
+     */
+    public function setPhotoFile(?File $photo = null)
+    {
+        $this->photoFile = $photo;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($photo) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedat = new \DateTime('now');
+        }
+    }
+
+    public function getPhotoFile()
+    {
+        return $this->photoFile;
+    }
+
+    public function __construct()
+    {
+        $this->sorties = new ArrayCollection();
+    }
+
+
+    }

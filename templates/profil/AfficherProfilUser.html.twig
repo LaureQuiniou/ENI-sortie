@@ -17,9 +17,13 @@
                 <p>Email :  {{ app.user.email }}</p>
                 <p>Campus :  {{ app.user.campus.nom }}</p>
             </div>
+
            <div class="col-md-3">
-                <img class="img_profil" src="{{ asset(app.user.photo) }}">
-            </div>
+               {% if not app.user.photo is same as NULL %} {#Condition si le user n'a pas de photo#}
+                   {#  <img class="img_profil" src="{{ asset(app.user.photo) }}">#}
+                    <img src="{{ vich_uploader_asset(app.user, 'photoFile') }}"> {# Attention revoir si app.user? ou Participant?  #}
+               {% endif %}
+           </div>
         </div>
 
         {# <img src="{{ vich_uploader_asset(article, 'imageFile')|imagine_filter('article')  }}" alt="Image"> #}

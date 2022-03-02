@@ -58,6 +58,7 @@ class ProfilController extends AbstractController
                 }
 
                 $entityManager->persist($user);
+
                 $entityManager->flush();
                 $this->addFlash('success','Vos modifications ont bien été prises en compte');
                 return $this->redirectToRoute('mon_profil');
