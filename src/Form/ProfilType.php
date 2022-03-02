@@ -51,7 +51,7 @@ class ProfilType extends AbstractType
             ])
             ->add('photoFile', VichImageType::class,[
                 'label' => 'photo de profil',
-                'mapped'=> true, //A revoir? Par défault c'est true
+                'mapped'=> false, //A revoir? Par défault c'est true
                 //'multiple' => false, Quand SELECT ou CHECkBOX
                 'required' => false
             ])
