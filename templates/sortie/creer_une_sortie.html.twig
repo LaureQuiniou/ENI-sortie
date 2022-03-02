@@ -22,19 +22,26 @@
                 {% include 'sortie/inc/_formulairePartieVille.html.twig' %}
                 </div>
                 {{ form_errors(sortieForm.lieu.ville) }}
-                {{ form_label(sortieForm.lieu.nom) }}
+
+                <div class="add">
+                    {{ form_label(sortieForm.lieu.nom) }}
+                    <a href="#"> <img src="{{ asset('img/addIcon.png') }}" alt="Ajouter" id="iconAdd"></a>
+                </div>
                 {{ form_widget(sortieForm.lieu.nom) }}
+                <div class="div-ville">
+                    {% include 'sortie/inc/_formulairePartieLieu.html.twig' %}
+                </div>
                 {{ form_errors(sortieForm.lieu.nom) }}
                 {{ form_label(sortieForm.lieu.rue) }}
-                {{ form_widget(sortieForm.lieu.rue) }}
+                {{ form_widget(sortieForm.lieu.rue, {attr: {'disabled': true}}) }}
                 {{ form_errors(sortieForm.lieu.rue) }}
             </div>
             <div>
                 {{ form_label(sortieForm.lieu.latitude) }}
-                {{ form_widget(sortieForm.lieu.latitude) }}
+                {{ form_widget(sortieForm.lieu.latitude,{attr: {'disabled': true}}) }}
                 {{ form_errors(sortieForm.lieu.latitude) }}
                 {{ form_label(sortieForm.lieu.longitude) }}
-                {{ form_widget(sortieForm.lieu.longitude) }}
+                {{ form_widget(sortieForm.lieu.longitude, {attr: {'disabled': true}}) }}
                 {{ form_errors(sortieForm.lieu.longitude) }}
             </div>
         </div>

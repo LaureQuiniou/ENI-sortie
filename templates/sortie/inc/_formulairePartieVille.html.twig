@@ -1,7 +1,7 @@
 
 <datalist id="villes">
     {%  for ville in villes %}
-        <option value="{{ ville }}">
+        <option value="{{ ville.codePostal }} {{ ville.nom }}">
     {% endfor %}
 </datalist>
 
