@@ -114,7 +114,7 @@
 
                             <!--ANNULER : 1 condition état "ouverte" et être organisateur  -->
                             {% if s.organisateur is same as(app.user) %}
-                                {% if s.dateHeureDebut < "now" %}
+                                {% if s.dateHeureDebut > "now" %}
                                     {% if s.etat.libelle is same as("Ouverte") %}
                                         <a href="{{ path('sortie_annuler', {id:s.id}) }}">Annuler</a>
                                     {% endif %}
