@@ -22,6 +22,10 @@ a{
     outline: none;
 }
 
+.btn-link{
+    margin-top: 14px;
+}
+
 .boutons{
     display: flex;
     gap: 30px;
