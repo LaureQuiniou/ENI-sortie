@@ -13,12 +13,13 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
  * @Vich\Uploadable()
  * @UniqueEntity(fields={"email"}, message="Il y a déjà un compte avec cet email")
  */
-class Participant implements UserInterface, PasswordAuthenticatedUserInterface
+class Participant implements UserInterface, PasswordAuthenticatedUserInterface, \Serializable
 {
     /**
      * @ORM\Id
@@ -131,6 +132,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @Vich\UploadableField(mapping="image_profil", fileNameProperty="photo")
+     * @Assert\File(mimeTypes={ "image/png", "image/jpeg", "image/jpg" })
      * @var File|null
      */
     private $photoFile;
@@ -341,16 +343,19 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      * during Doctrine hydration.
      *
      */
-    public function setPhotoFile(?File $photoFile = null) : void
+    public function setPhotoFile(?File $photoFile = null)
     {
         $this->photoFile = $photoFile;
+
         // VERY IMPORTANT:
         // It is required that at least one field changes if you are using Doctrine,
         // otherwise the event listeners won't be called and the file is lost
         if (null!==$photoFile) {
             // if 'updatedAt' is not defined in your entity, use another property
             $this->updatedAt = new \DateTime('now');
+
         }
+        //return $this->updatedAt;
     }
 
     public function getPhotoFile():?File
@@ -375,4 +380,23 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
         $this->sorties = new ArrayCollection();
     }
 
+######SERIALIZABLE
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->email,
+            $this->password,
+        ));
     }
+
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->email,
+            $this->password,
+            ) = unserialize($serialized);
+    }
+
+}
