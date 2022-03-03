@@ -323,6 +323,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPhotoFile(?File $photoFile = null) : void
     {
         $this->photoFile = $photoFile;
+
         // VERY IMPORTANT:
         // It is required that at least one field changes if you are using Doctrine,
         // otherwise the event listeners won't be called and the file is lost
@@ -352,6 +353,28 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->sorties = new ArrayCollection();
+    }
+
+######SERIALIZABLE
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized);
     }
 
     }
