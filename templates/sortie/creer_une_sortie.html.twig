@@ -9,17 +9,22 @@
 {% endblock %}
 
 {% block body %}
-    <h2>Créer une nouvelle sortie</h2>
+    {% if not(sortieEnCours.id is same as null) %}
+        <h2>Modifier la sortie</h2>
+    {% else %}
+        <h2>Créer une nouvelle sortie</h2>
+    {% endif %}
+
     {{ form_start(sortieForm, {attr: {class: 'js-filter-villes'}}) }}
 
         <div class="formulaire js-filter">
-            {%  include 'sortie/inc/_formulairePartieSortie.html.twig' with {sortieForm: sortieForm} only%}
+            {%  include 'sortie/inc/_formulairePartieSortie.html.twig' with {sortieForm: sortieForm, sortieEnCours: sortieEnCours}%}
 
             <div>
                 {{ form_label(sortieForm.lieu.ville) }}
-                {{ form_widget(sortieForm.lieu.ville,{attr:{'class': 'form-ville'}}) }}
+                {{ form_widget(sortieForm.lieu.ville,{'attr':{'class': 'form-ville', value: sortieEnCours.lieu.ville|trim(' ')}}) }}
                 <div class="div-ville">
-                {% include 'sortie/inc/_formulairePartieVille.html.twig' %}
+                {% include 'sortie/inc/_formulairePartieVille.html.twig' with {villes: villes} %}
                 </div>
                 {{ form_errors(sortieForm.lieu.ville) }}
 
@@ -27,7 +32,7 @@
                     {{ form_label(sortieForm.lieu.nom) }}
                     <a href="#"> <img src="{{ asset('img/addIcon.png') }}" alt="Ajouter" id="iconAdd"></a>
                 </div>
-                {{ form_widget(sortieForm.lieu.nom, {'attr':{'class': 'form-lieu'}}) }}
+                {{ form_widget(sortieForm.lieu.nom, {'attr':{'class': 'form-lieu',value: sortieEnCours.lieu.nom}}) }}
                     <div class="div-lieu">
                         {% include 'sortie/inc/_formulairePartieLieu.html.twig' %}
                     </div>
@@ -38,10 +43,16 @@
                 </div>
             </div>
         </div>
+
         <div class="boutons">
             <button type="submit" class="btn btn-lg btn-primary" name="enregistrer" value="enregistrer">Enregistrer</button>
             <button type="submit" class="btn btn-lg btn-primary" name="publier" value="publier">Publier la sortie</button>
-            <button type="reset" class="btn btn-lg btn-primary">Annuler</button>
+            {% if not(sortieEnCours.id is same as null) %}
+                <button type="submit" class="btn btn-lg btn-primary" name="supprimer" value="supprimer">Supprimer la sortie</button>
+                <button type="button" class="btn btn-lg btn-primary"><a href="{{ path('sorties_afficher') }}">Annuler</a></button>
+            {% else %}
+                <button type="reset" class="btn btn-lg btn-primary">Annuler</button>
+            {% endif %}
         </div>
 
 
