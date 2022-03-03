@@ -30,7 +30,7 @@
 
                 <div class="add">
                     {{ form_label(sortieForm.lieu.nom) }}
-                    <a href="#"> <img src="{{ asset('img/addIcon.png') }}" alt="Ajouter" id="iconAdd"></a>
+                    <a href="#" onclick="addLieu();"> <img src="{{ asset('img/addIcon.png') }}" alt="Ajouter" id="iconAdd"></a>
                 </div>
                 {{ form_widget(sortieForm.lieu.nom, {'attr':{'class': 'form-lieu',value: sortieEnCours.lieu.nom}}) }}
                     <div class="div-lieu">
@@ -49,7 +49,7 @@
             <button type="submit" class="btn btn-lg btn-primary" name="publier" value="publier">Publier la sortie</button>
             {% if not(sortieEnCours.id is same as null) %}
                 <button type="submit" class="btn btn-lg btn-primary" name="supprimer" value="supprimer">Supprimer la sortie</button>
-                <button type="button" class="btn btn-lg btn-primary"><a href="{{ path('sorties_afficher') }}">Annuler</a></button>
+            <a href="{{ path('sorties_afficher') }}" class="btn-link"><button type="button" class="btn btn-lg btn-primary mt-10">Annuler</button></a>
             {% else %}
                 <button type="reset" class="btn btn-lg btn-primary">Annuler</button>
             {% endif %}

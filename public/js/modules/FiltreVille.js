@@ -14,6 +14,7 @@ export class FiltreVille {
         }else {
             this.form = element.querySelector('.js-filter-villes');
             this.bindEvents();
+            this.addLieu();
         }
     }
 
@@ -23,6 +24,7 @@ export class FiltreVille {
      */
 
     bindEvents() {
+
         let url=(window.location.href).replace(/(modifierSortie\/){1}\d+/,"cree_une_sortie")
         document.querySelector('.form-ville').addEventListener('keyup', e => {
             e.preventDefault();
