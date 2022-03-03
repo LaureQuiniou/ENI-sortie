@@ -75,7 +75,7 @@ class SortieController extends AbstractController
         $ville = new Ville;
         $li->setVille($ville);
         $sortieEnCours->setLieu($li);
-        $sortie = new Sortie();
+       // $sortie = new Sortie();
         $lieux=[];
         $organisateur = $participantRepository->findOneBy(['email'=>$this->getUser()->getUserIdentifier()]);
         $villes=[];
@@ -87,7 +87,7 @@ class SortieController extends AbstractController
         }
 
         //création du formulaire
-        $sortieForm = $this->createForm(SortieType::class, $sortie);
+        $sortieForm = $this->createForm(SortieType::class, $sortieEnCours);
         $sortieForm->handleRequest($request);
 
         //Traitement des requets Ajax
@@ -106,7 +106,7 @@ class SortieController extends AbstractController
                     $villes = $villeRepository->findVille($data);
                     return new JsonResponse(['content' => $this->renderView('sortie/inc/_formulairePartieVille.html.twig', ['villes' => $villes])]);
                 }
-            }elseif (!empty($request->get('lieu'))){
+            }elseif (!empty($request->get('lieu'))&&$request->get('lieu')!=1){
                     $lieu=$lieuRepository->findOneBy(["nom"=>$request->get('lieu')]);
                     $sortieEnCours->setLieu($lieu);
                     return new JsonResponse(['content'=> $this->renderView('sortie/inc/_formulairePartieRue.html.twig', ['sortieForm'=>$sortieForm->createView(),'sortieEnCours'=>$sortieEnCours])]);
@@ -118,19 +118,20 @@ class SortieController extends AbstractController
             $villess= explode(' ',$sortieForm['lieu']['ville']->getdata());
             $ville= $villeRepository->findBy(['nom'=>$villess[1]]);
             $lieu = $lieuRepository->findOneBy(['ville'=>$ville,'nom'=>$sortieForm['lieu']['nom']->getdata()]);
-            $sortie->setCampus($this->getUser()->getCampus());
-            $sortie->setOrganisateur($organisateur);
+            dump($lieu);
+            $sortieEnCours->setCampus($this->getUser()->getCampus());
+            $sortieEnCours->setOrganisateur($organisateur);
             if(!empty($request->request->get('publier') )){
                 $etat = $etatRepository->findOneBy(['libelle' => 'Ouverte']);
-                $sortie->setEtat($etat);
+                $sortieEnCours->setEtat($etat);
                 $this->addFlash('success', 'Votre sortie a bien été publiée!!');
             }elseif(!empty($request->request->get('enregistrer'))){
                 $etat = $etatRepository->findOneBy(['libelle' => 'Création']);
-                $sortie->setEtat($etat);
+                $sortieEnCours->setEtat($etat);
                 $this->addFlash('success', 'Votre sortie a bien été enregistrée !!');
             }
-            $sortie->setLieu($lieu);
-            $entityManager->persist($sortie);
+            $sortieEnCours->setLieu($lieu);
+            $entityManager->persist($sortieEnCours);
             $entityManager->flush();
 
 

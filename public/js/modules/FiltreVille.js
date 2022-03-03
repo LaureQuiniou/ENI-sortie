@@ -84,6 +84,7 @@ export class FiltreVille {
     }
 
     async loadVille(url, data) {
+        console.log(url + '?ajax=1' + data)
             const response = await fetch(url + '?ajax=1' + data  , {
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
@@ -91,6 +92,7 @@ export class FiltreVille {
             })
             if (response.status >= 200 && response.status < 300) {
                 const data = await response.json()
+                console.log(data)
                 document.querySelector('.div-ville').innerHTML = data.content
 
             } else {

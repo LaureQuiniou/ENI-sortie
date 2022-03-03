@@ -17,11 +17,21 @@ form{
     justify-items: center;
 }
 
+a{
+    color: white;
+    outline: none;
+}
+
 .boutons{
     display: flex;
     gap: 30px;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+a:visited:hover:active:link{
+    color: white;
+    outline: none;
 }
 
 .formulaire{
