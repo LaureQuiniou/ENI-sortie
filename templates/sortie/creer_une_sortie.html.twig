@@ -27,27 +27,20 @@
                     {{ form_label(sortieForm.lieu.nom) }}
                     <a href="#"> <img src="{{ asset('img/addIcon.png') }}" alt="Ajouter" id="iconAdd"></a>
                 </div>
-                {{ form_widget(sortieForm.lieu.nom) }}
-                <div class="div-ville">
-                    {% include 'sortie/inc/_formulairePartieLieu.html.twig' %}
-                </div>
+                {{ form_widget(sortieForm.lieu.nom, {'attr':{'class': 'form-lieu'}}) }}
+                    <div class="div-lieu">
+                        {% include 'sortie/inc/_formulairePartieLieu.html.twig' %}
+                    </div>
                 {{ form_errors(sortieForm.lieu.nom) }}
-                {{ form_label(sortieForm.lieu.rue) }}
-                {{ form_widget(sortieForm.lieu.rue, {attr: {'disabled': true}}) }}
-                {{ form_errors(sortieForm.lieu.rue) }}
-            </div>
-            <div>
-                {{ form_label(sortieForm.lieu.latitude) }}
-                {{ form_widget(sortieForm.lieu.latitude,{attr: {'disabled': true}}) }}
-                {{ form_errors(sortieForm.lieu.latitude) }}
-                {{ form_label(sortieForm.lieu.longitude) }}
-                {{ form_widget(sortieForm.lieu.longitude, {attr: {'disabled': true}}) }}
-                {{ form_errors(sortieForm.lieu.longitude) }}
+
+                <div class="div-rue">
+                    {% include 'sortie/inc/_formulairePartieRue.html.twig' with {sortieForm: sortieForm}%}
+                </div>
             </div>
         </div>
         <div class="boutons">
-            <button type="submit" class="btn btn-lg btn-primary">Enregistrer</button>
-            <button type="submit" class="btn btn-lg btn-primary">Publier la sortie</button>
+            <button type="submit" class="btn btn-lg btn-primary" name="enregistrer" value="enregistrer">Enregistrer</button>
+            <button type="submit" class="btn btn-lg btn-primary" name="publier" value="publier">Publier la sortie</button>
             <button type="reset" class="btn btn-lg btn-primary">Annuler</button>
         </div>
 

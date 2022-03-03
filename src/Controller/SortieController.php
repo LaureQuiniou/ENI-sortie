@@ -8,6 +8,7 @@ use App\Entity\Lieu;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Entity\Ville;
+use App\Form\LieuType;
 use App\Form\SearchForm;
 use App\Form\SortieType;
 use App\Repository\EtatRepository;
@@ -72,48 +73,64 @@ class SortieController extends AbstractController
     {
 
         $sortie = new Sortie();
+        $lieux=[];
         $organisateur = $participantRepository->findOneBy(['email'=>$this->getUser()->getUserIdentifier()]);
         $villes=[];
+        $li= new Lieu();
 
         $sortieForm = $this->createForm(SortieType::class, $sortie);
         $sortieForm->handleRequest($request);
 
         if($request->get('ajax')){
-            $data=$request->get('data');
-            $villes = $villeRepository->findVille($data);
-            return new JsonResponse(['content'=> $this->renderView('sortie/inc/_formulairePartieVille.html.twig',['villes'=>$villes])]);
+            if(!empty($request->get('ville'))) {
+                if (!empty($request->get('lieu'))) {
+                    $villee = $request->get('ville');
+                    $lieu = $request->get('lieu');
+                    if ($lieu == 1) {
+                        $lieu = '';
+                    }
+                    $lieux = $lieuRepository->findLieux($villee, $lieu);
+                    return new JsonResponse(['content' => $this->renderView('sortie/inc/_formulairePartieLieu.html.twig', ['lieux' => $lieux])]);
+                } else {
+                    $data = $request->get('ville');
+                    $villes = $villeRepository->findVille($data);
+                    return new JsonResponse(['content' => $this->renderView('sortie/inc/_formulairePartieVille.html.twig', ['villes' => $villes])]);
+                }
+                }elseif (!empty($request->get('lieu'))){
+                    $lieu=$lieuRepository->findOneBy(["nom"=>$request->get('lieu')]);
+                    $sortie->setLieu($lieu);
+                    return new JsonResponse(['content'=> $this->renderView('sortie/inc/_formulairePartieRue.html.twig', ['sortieForm'=>$sortieForm->createView(),'lieu'=>$lieu])]);
+                }
 
         }
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
-            $lieu = $lieuRepository->findOneBy(['nom'=>'Le chat Noir']);
+            $villess= explode(' ',$sortieForm['lieu']['ville']->getdata());
+            $ville= $villeRepository->findBy(['nom'=>$villess[1]]);
+            $lieu = $lieuRepository->findOneBy(['ville'=>$ville,'nom'=>$sortieForm['lieu']['nom']->getdata()]);
             $sortie->setCampus($this->getUser()->getCampus());
             $sortie->setOrganisateur($organisateur);
-            $etat = $etatRepository->findOneBy(['libelle'=>'ouverte']);
-            $sortie->setEtat($etat);
+            if(!empty($request->request->get('publier') )){
+                $etat = $etatRepository->findOneBy(['libelle' => 'Ouverte']);
+                $sortie->setEtat($etat);
+                $this->addFlash('success', 'Votre sortie a bien été publiée!!');
+            }elseif(!empty($request->request->get('enregistrer'))){
+                $etat = $etatRepository->findOneBy(['libelle' => 'Création']);
+                $sortie->setEtat($etat);
+                $this->addFlash('success', 'Votre sortie a bien été enregistrée !!');
+            }
             $sortie->setLieu($lieu);
             $entityManager->persist($sortie);
             $entityManager->flush();
+
+
+            return $this->redirectToRoute('sorties_afficher');
         }
 
 
         return $this->render('sortie/creer_une_sortie.html.twig', [
-                'sortieForm' => $sortieForm->createView(),'villes' => $villes
+                'sortieForm' => $sortieForm->createView(),'villes' => $villes, 'lieux' => $lieux, 'lieu' => $li
         ]);
-    }
-
-
-    /**
-     * @Route("/cree_une_sortie/post/ville", name="sortie_creer_post_ville")
-     */
-    public function postVille(Request $request, VilleRepository $villeRepository)
-    {
-        if ($request->get('ajax')) {
-            $ville=$request->get('ville');
-            //$villes = $villeRepository->findVille($ville);
-            $villes=['Nantes', 'Quimper'];
-            return new JsonResponse(['content' => ['villes' => $villes]]);
-        }
     }
 
 

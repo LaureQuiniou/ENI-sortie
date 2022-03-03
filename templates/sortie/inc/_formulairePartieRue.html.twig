@@ -1,0 +1,13 @@
+{{ form_label(sortieForm.lieu.rue) }}
+{{ form_widget(sortieForm.lieu.rue, {attr: {'disabled': true, value: lieu.rue }})  }}
+{{ form_errors(sortieForm.lieu.rue) }}
+
+<div>
+    {{ form_label(sortieForm.lieu.latitude) }}
+    {{ form_widget(sortieForm.lieu.latitude,{attr: {'disabled': true, value: lieu.latitude}}) }}
+    {{ form_errors(sortieForm.lieu.latitude) }}
+    {{ form_label(sortieForm.lieu.longitude) }}
+    {{ form_widget(sortieForm.lieu.longitude, {attr: {'disabled': true, value: lieu.longitude}}) }}
+    {{ form_errors(sortieForm.lieu.longitude) }}
+
+</div>
