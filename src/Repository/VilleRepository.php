@@ -25,7 +25,6 @@ class VilleRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('v')
             ->andWhere('v.nom LIKE :nom')
             ->orWhere('v.codePostal LIKE :codePostal')
-            //->orWhere('v.nom= %:nom%')
             ->setParameter('codePostal', $data.'%')
             ->setParameter('nom', $data.'%')
             ->orderBy('v.nom', 'ASC')
@@ -33,4 +32,5 @@ class VilleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
 }
