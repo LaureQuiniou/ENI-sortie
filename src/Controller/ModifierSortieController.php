@@ -15,7 +15,7 @@ class ModifierSortieController extends AbstractController
 {
 
     /**
-     * @Route("/modifierSortie/{id}",name="modifier_sortie", methods={"GET"})
+     * @Route("/modifierSortie/{id}",name="modifier_sortie")
      */
     public function modifierSortie(int $id, EntityManagerInterface $entityManager, Request $request,SortieRepository $sortieRepository): Response
     {
