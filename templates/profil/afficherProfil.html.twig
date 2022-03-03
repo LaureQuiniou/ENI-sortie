@@ -11,11 +11,11 @@
             <h2>{{ participant.pseudo }}</h2>
             <div class="div_profil">
                 <div class="col-md-9">
-                    <p>Prénom :  {{ participant.prenom }}</p>
-                    <p>Nom :  {{ participant.nom }}</p>
-                    <p>Téléphone :  {{ participant.telephone }}</p>
-                    <p>Email :  {{ participant.email }}</p>
-                    <p>Campus :  {{ participant.campus.nom }}</p>
+                    <div class="label-sortie"><label>Prénom : </label> {{ participant.prenom }}</div>
+                    <div class="label-sortie"><label>Nom : </label> {{ participant.nom }}</div>
+                    <div class="label-sortie"><label>Téléphone : </label> {{ participant.telephone }}</div>
+                    <div class="label-sortie"><label>Email : </label> {{ participant.email }}</div>
+                    <div class="label-sortie"><label>Campus : </label> {{ participant.campus.nom }}</div>
                 </div>
                     <div class="col-md-3">
                         <img class="img_profil" src="{{ asset('img/Avatar/'~app.user.photo) }}">
