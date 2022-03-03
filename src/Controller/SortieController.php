@@ -112,6 +112,13 @@ class SortieController extends AbstractController
                     return new JsonResponse(['content'=> $this->renderView('sortie/inc/_formulairePartieRue.html.twig', ['sortieForm'=>$sortieForm->createView(),'sortieEnCours'=>$sortieEnCours])]);
             }
         }
+        // cas suppression de la sortie dans la bdd
+        if (!empty($request->request->get('supprimer'))){
+            $entityManager->remove($sortieEnCours);
+            $entityManager->flush();
+            $this->addFlash('success','Votre sortie a bien été supprimée');
+            return $this->redirectToRoute('sorties_afficher');
+        }
 
         //Traitement des données
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
