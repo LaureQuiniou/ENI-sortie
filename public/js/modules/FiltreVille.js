@@ -23,10 +23,12 @@ export class FiltreVille {
      */
 
     bindEvents() {
+        let url=(window.location.href).replace(/(modifierSortie\/){1}\d+/,"cree_une_sortie")
         document.querySelector('.form-ville').addEventListener('keyup', e => {
             e.preventDefault();
+            console.log(url)
             const data= '&ville='+ document.querySelector('.form-ville').value;
-            this.loadVille(window.location.href, data);
+            this.loadVille(url, data);
         })
 
         document.querySelector('.form-ville').addEventListener('input', e =>{
@@ -34,7 +36,7 @@ export class FiltreVille {
             const words = document.querySelector('.form-ville').value.split(' ');
             const lieu = 1
             const data = '&ville=' + words[1] + '&lieu=' + lieu
-            this.loadLieu(window.location.href, data);
+            this.loadLieu(url, data);
         })
 
         document.querySelector('.form-lieu').addEventListener('keyup', e =>{
@@ -42,19 +44,18 @@ export class FiltreVille {
             const words = document.querySelector('.form-ville').value.split(' ');
             const lieu = document.querySelector('.form-lieu').value
             const data = '&ville=' + words[1] + '&lieu=' + lieu
-            this.loadLieu(window.location.href, data);
+            this.loadLieu(url, data);
         })
 
         document.querySelector('.form-lieu').addEventListener('blur', e =>{
             e.preventDefault();
             const data = '&lieu=' + document.querySelector('.form-lieu').value
-            this.loadRue(window.location.href, data);
+            this.loadRue(url, data);
         })
 
     }
 
     async loadRue(url, data){
-        console.log(url + data)
         const response = await fetch(url + '?ajax=1' + data  , {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'

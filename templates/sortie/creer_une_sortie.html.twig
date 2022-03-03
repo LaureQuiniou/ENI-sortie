@@ -48,7 +48,7 @@
             <button type="submit" class="btn btn-lg btn-primary" name="enregistrer" value="enregistrer">Enregistrer</button>
             <button type="submit" class="btn btn-lg btn-primary" name="publier" value="publier">Publier la sortie</button>
             {% if not(sortieEnCours.id is same as null) %}
-                <button type="submit" class="btn btn-lg btn-primary">Supprimer la sortie</button>
+                <button type="submit" class="btn btn-lg btn-primary" name="supprimer" value="supprimer">Supprimer la sortie</button>
                 <button type="button" class="btn btn-lg btn-primary"><a href="{{ path('sorties_afficher') }}">Annuler</a></button>
             {% else %}
                 <button type="reset" class="btn btn-lg btn-primary">Annuler</button>
