@@ -57,8 +57,16 @@ class ProfilController extends AbstractController
                     $user->setPassword($request->request->get('newPassword'));
                 }
 
-                $entityManager->persist($user);
+                //photo
+                $file = $profilForm->get('photo')->getData();
+                if ($file)
+                {
+                    $newFilename = $user->getNom()."-".$user->getId().".".$file->guessExtension();
+                    $file->move($this->getParameter('image_profil'), $newFilename);
+                    $user->setPhoto($newFilename);
+                }
 
+                $entityManager->persist($user);
                 $entityManager->flush();
                 $this->addFlash('success','Vos modifications ont bien été prises en compte');
                 return $this->redirectToRoute('mon_profil');

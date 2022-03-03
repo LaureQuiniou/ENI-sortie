@@ -21,7 +21,6 @@
            <div class="col-md-3">
                {% if not app.user.photo is same as NULL %}
                      <img class="img_profil" src="{{ asset('img/Avatar/'~app.user.photo) }}">
-                   {# <img src="{{ vich_uploader_asset(app.user, 'photoFile') }}"> {# Attention revoir si app.user? ou Participant?  #}
                {% endif %}
            </div>
         </div>

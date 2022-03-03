@@ -11,7 +11,7 @@
 {% block body %}
 
     <h2>Mon profil</h2>
-        {{ form_start(profilForm) }}
+        {{ form_start(profilForm, enctype="multipart/form-data")  }}
         <div class="col-md-9">
             {{ form_row(profilForm.pseudo, {'value': app.user.pseudo}) }}
             {{ form_row(profilForm.prenom, {'value': app.user.prenom}) }}
@@ -22,7 +22,7 @@
         <div class="col-md-9">
             {{ form_row(profilForm.campus) }}
             {{ form_row(profilForm.newPassword) }}
-            {{ form_row(profilForm.photoFile) }}
+            {{ form_row(profilForm.photo) }}
 
             <div id="btn_modifier_profil">
                 <button type="submit" class="btn btn-lg btn-primary">Enregistrer</button>
@@ -32,7 +32,7 @@
 
         {# Affichage de la photo de profil  #}
         <div class="col-md-3">
-            {#  <img class="img_profil" src="{{ asset(app.user.photo) }}">#}
+            <img class="img_profil" src="{{ asset('img/Avatar/'~app.user.photo) }}">
         </div>
 
 
