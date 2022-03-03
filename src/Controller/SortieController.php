@@ -70,17 +70,27 @@ class SortieController extends AbstractController
      */
     public function creerSortie(Request $request, EntityManagerInterface $entityManager, VilleRepository $villeRepository,
                                 LieuRepository $lieuRepository,ParticipantRepository $participantRepository, EtatRepository $etatRepository): Response
-    {
-
+    {   $sortieEnCours=new Sortie();
+        $li= new Lieu();
+        $ville = new Ville;
+        $li->setVille($ville);
+        $sortieEnCours->setLieu($li);
         $sortie = new Sortie();
         $lieux=[];
         $organisateur = $participantRepository->findOneBy(['email'=>$this->getUser()->getUserIdentifier()]);
         $villes=[];
-        $li= new Lieu();
 
+        //récuppère info dans le cas de modifier sortie
+        if(($request->get('sortieEnCours'))) {
+            $sortieEnCours = $request->get('sortieEnCours');
+            //$sortie=clone $sortieEnCours;
+        }
+
+        //création du formulaire
         $sortieForm = $this->createForm(SortieType::class, $sortie);
         $sortieForm->handleRequest($request);
 
+        //Traitement des requets Ajax
         if($request->get('ajax')){
             if(!empty($request->get('ville'))) {
                 if (!empty($request->get('lieu'))) {
@@ -96,14 +106,14 @@ class SortieController extends AbstractController
                     $villes = $villeRepository->findVille($data);
                     return new JsonResponse(['content' => $this->renderView('sortie/inc/_formulairePartieVille.html.twig', ['villes' => $villes])]);
                 }
-                }elseif (!empty($request->get('lieu'))){
+            }elseif (!empty($request->get('lieu'))){
                     $lieu=$lieuRepository->findOneBy(["nom"=>$request->get('lieu')]);
-                    $sortie->setLieu($lieu);
-                    return new JsonResponse(['content'=> $this->renderView('sortie/inc/_formulairePartieRue.html.twig', ['sortieForm'=>$sortieForm->createView(),'lieu'=>$lieu])]);
-                }
-
+                    $sortieEnCours->setLieu($lieu);
+                    return new JsonResponse(['content'=> $this->renderView('sortie/inc/_formulairePartieRue.html.twig', ['sortieForm'=>$sortieForm->createView(),'sortieEnCours'=>$sortieEnCours])]);
+            }
         }
 
+        //Traitement des données
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
             $villess= explode(' ',$sortieForm['lieu']['ville']->getdata());
             $ville= $villeRepository->findBy(['nom'=>$villess[1]]);
@@ -129,7 +139,7 @@ class SortieController extends AbstractController
 
 
         return $this->render('sortie/creer_une_sortie.html.twig', [
-                'sortieForm' => $sortieForm->createView(),'villes' => $villes, 'lieux' => $lieux, 'lieu' => $li
+                'sortieForm' => $sortieForm->createView(),'villes' => $villes, 'lieux' => $lieux, 'lieu' => $li, 'sortieEnCours'=>$sortieEnCours
         ]);
     }
 
