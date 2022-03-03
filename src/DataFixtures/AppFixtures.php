@@ -21,15 +21,15 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         // Campus
-        $quinper = new Campus();
-        $quinper->setNom('Quimper');
+        $quimper = new Campus();
+        $quimper->setNom('Quimper');
         $stHerblain = new Campus();
         $stHerblain -> setNom('Saint-Herblain');
         $chartres = new Campus();
         $chartres ->setNom('Chartres-de-Bretagne');
         $roche = new Campus();
         $roche -> setNom('La Roche-Sur-Yon');
-        $manager->persist($quinper);
+        $manager->persist($quimper);
         $manager->persist($stHerblain);
         $manager->persist($chartres);
         $manager->persist($roche);
@@ -109,6 +109,7 @@ class AppFixtures extends Fixture
         $user1->setPseudo('adminou');
         $user1->setTelephone('01.35.45.78.65');
         $user1->setActif(true);
+        $user1->setSuppression(false);
         $user1->setCampus($chartres);
         $user1->setPhoto('avataaars(1).png');
 
@@ -120,6 +121,7 @@ class AppFixtures extends Fixture
         $user2->setPseudo('userinou');
         $user2->setTelephone('05.45.78.36.67');
         $user2->setActif(true);
+        $user2->setSuppression(false);
         $user2->setCampus($stHerblain);
         $user2->setPhoto('avataaars(2).png');
 
@@ -131,7 +133,8 @@ class AppFixtures extends Fixture
         $user3->setPseudo('organinou');
         $user3->setTelephone('07.32.98.54.22');
         $user3->setActif(true);
-        $user3->setCampus($quinper);
+        $user3->setSuppression(false);
+        $user3->setCampus($quimper);
         $user3->setPhoto('avataaars.png');
 
         $user4->setNom('Marteau');
@@ -142,6 +145,7 @@ class AppFixtures extends Fixture
         $user4->setPseudo('participinou');
         $user4->setTelephone('02.55.84.10.74');
         $user4->setActif(true);
+        $user4->setSuppression(false);
         $user4->setCampus($roche);
 
         $manager->persist($user1);
@@ -209,7 +213,7 @@ class AppFixtures extends Fixture
         $sortie4->setEtat($ouverte);
         $sortie4->setNbInscriptionsMax(13);
 
-        $sortie5->setCampus($quinper);
+        $sortie5->setCampus($quimper);
         $sortie5->setNom('Bowling ! ');
         $sortie5->setInfosSortie('Pour les fan de Bowling ou juste pour rencontrer les élèves de l\'ENI !');
         $sortie5->setLieu($bow);
@@ -223,7 +227,7 @@ class AppFixtures extends Fixture
         $sortie5->addParticipant($user3);
         $sortie5->addParticipant($user4);
 
-        $sortie6->setCampus($quinper);
+        $sortie6->setCampus($quimper);
         $sortie6->setNom('Un petit bowling !!');
         $sortie6->setInfosSortie('Pour les fan de Bowling !');
         $sortie6->setLieu($bow);
@@ -237,7 +241,7 @@ class AppFixtures extends Fixture
         $sortie6->addParticipant($user3);
         $sortie6->addParticipant($user4);
 
-        $sortie7->setCampus($quinper);
+        $sortie7->setCampus($quimper);
         $sortie7->setNom('Rencontre entre élève');
         $sortie7->setInfosSortie('Pour faire connaissance !');
         $sortie7->setLieu($bow);
@@ -251,7 +255,7 @@ class AppFixtures extends Fixture
         $sortie7->addParticipant($user3);
         $sortie7->addParticipant($user4);
 
-        $sortie8->setCampus($quinper);
+        $sortie8->setCampus($quimper);
         $sortie8->setNom('Atelier couture');
         $sortie8->setInfosSortie('Atelier couture, prévoyez vos machines et vos patrons !');
         $sortie8->setLieu($bow);

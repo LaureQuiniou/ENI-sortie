@@ -79,6 +79,27 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private $actif;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $suppression;
+
+    /**
+     * @return mixed
+     */
+    public function getSuppression()
+    {
+        return $this->suppression;
+    }
+
+    /**
+     * @param mixed $suppression
+     */
+    public function setSuppression($suppression): void
+    {
+        $this->suppression = $suppression;
+    }
+
+    /**
      * @ORM\ManyToOne(targetEntity=Campus::class)
      * @ORM\JoinColumn(nullable=false)
      */

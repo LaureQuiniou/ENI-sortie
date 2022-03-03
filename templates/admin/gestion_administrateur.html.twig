@@ -15,18 +15,23 @@
         <th>Nom</th>
         <th>Prénom</th>
         <th>Email</th>
+        <th>Actif/pas actif? </th>
         <th>Actions</th>
     </tr>
 
-        {% for u in utilisateurs %}
-        <tr>
-            <td>{{ u.nom }}</td>
-            <td>{{ u.prenom }}</td>
-            <td>{{ u.email }}</td>
-            <td><a class="btn btn-primary" href="{{ path('admin_register') }}">Supprimer </a>
-                <a class="btn btn-primary" href="{{ path('admin_register') }}">Désactiver </a></td>
-        </tr>
-        {% endfor %}
+            {% for u in utilisateurs %}
+                {% if not u.suppression %}
+            <tr>
+                <td>{{ u.nom }}</td>
+                <td>{{ u.prenom }}</td>
+                <td>{{ u.email }}</td>
+                <td>{{ u.actif? 'actif' : 'inactif' }} </td>
+                <td><a class="btn btn-primary" href="{{ path('admin_supprimerUtilisateur', {id:u.id}) }}"> {{ u.suppression? '' : 'Supprimer' }} </a>
+                    <a class="btn btn-primary" href="{{ path('admin_desactiverUtilisateur', {id:u.id}) }}"> {{ u.actif? 'Désactiver' : 'Réactiver' }} </a></td>
+            </tr>
+                {% endif %}
+            {% endfor %}
+
     </table>
 
 {% endblock %}
