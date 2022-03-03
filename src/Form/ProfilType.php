@@ -21,6 +21,7 @@ class ProfilType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->setMethod('post')
             ->add('pseudo', TextType::class, [
                 'required' => false
             ])
@@ -50,7 +51,12 @@ class ProfilType extends AbstractType
                 'choice_label' => 'nom'
             ])
             //J'atoute un champs photo qui n'est pas lié à la BDD, 'multiple' => false, Quand SELECT ou CHECkBOX
-            ->add('photoFile', VichImageType::class,[
+            /*->add('photoFile', VichImageType::class,[
+                'label' => 'photo de profil',
+                'mapped'=> false,
+                'required' => false
+            ])*/
+            ->add('photo', FileType::class,[
                 'label' => 'photo de profil',
                 'mapped'=> false,
                 'required' => false

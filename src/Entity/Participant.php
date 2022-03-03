@@ -16,7 +16,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
- * @Vich\Uploadable()
  * @UniqueEntity(fields={"email"}, message="Il y a déjà un compte avec cet email")
  */
 class Participant implements UserInterface, PasswordAuthenticatedUserInterface, \Serializable
@@ -131,7 +130,6 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface, 
     private $photo;
 
     /**
-     * @Vich\UploadableField(mapping="image_profil", fileNameProperty="photo")
      * @Assert\File(mimeTypes={ "image/png", "image/jpeg", "image/jpg" })
      * @var File|null
      */
