@@ -22,9 +22,11 @@ class ModifierSortieController extends AbstractController
         //récupère cette sortie
         $sortieEnCours=$sortieRepository->find($id);
 
-        //Génère le Form
+        /*//Génère le Form
         $sortieForm = $this->createForm(SortieType::class, $sortieEnCours);
         $sortieForm->handleRequest($request);
+
+
 
         if($sortieForm->isSubmitted() && $sortieForm->isValid())
         {
@@ -33,9 +35,9 @@ class ModifierSortieController extends AbstractController
             $this->addFlash('success','Ta sortie a été modifiée avec succès ! ');
             return $this->redirectToRoute('sortie_afficher');
         }
-
+        */
         //Redirige
-        return $this->renderForm('modifier_sortie/modifSortie.html.twig', compact ('sortieForm') );
+        return $this->forward('App\Controller\SortieController::creerSortie',['sortieEnCours'=>$sortieEnCours]);
     }
 
 }

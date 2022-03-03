@@ -24,7 +24,7 @@ class SortieType extends AbstractType
             ->add('dateLimiteInscription',DateType::class,['html5'=>true, 'widget'=>'single_text'])
             ->add('duree', TimeType::class, ['html5'=>true, 'widget'=>'single_text'])
             ->add('nbInscriptionsMax',IntegerType::class, ['attr' => ['min'=>'2','value'=>'2'], 'label'=>'Nombre Maximum de participants'])
-            ->add('infosSortie', TextareaType::class,['label'=>'Description de la sortie'])
+            ->add('infosSortie', TextareaType::class,['label'=>'Description de la sortie','data'=>''])
             ->add('lieu',LieuType::class)
 
         ;
