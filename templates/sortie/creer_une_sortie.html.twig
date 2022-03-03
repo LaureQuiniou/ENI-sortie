@@ -22,9 +22,9 @@
 
             <div>
                 {{ form_label(sortieForm.lieu.ville) }}
-                {{ form_widget(sortieForm.lieu.ville,{attr:{'class': 'form-ville',value: sortieEnCours.lieu.ville}}) }}
+                {{ form_widget(sortieForm.lieu.ville,{'attr':{'class': 'form-ville', value: sortieEnCours.lieu.ville|trim(' ')}}) }}
                 <div class="div-ville">
-                {% include 'sortie/inc/_formulairePartieVille.html.twig' with {sortieForm: sortieForm} %}
+                {% include 'sortie/inc/_formulairePartieVille.html.twig' with {villes: villes} %}
                 </div>
                 {{ form_errors(sortieForm.lieu.ville) }}
 
@@ -49,7 +49,7 @@
             <button type="submit" class="btn btn-lg btn-primary" name="publier" value="publier">Publier la sortie</button>
             {% if not(sortieEnCours.id is same as null) %}
                 <button type="submit" class="btn btn-lg btn-primary">Supprimer la sortie</button>
-                <a href="{{ path('sorties_afficher') }}"><button type="button" class="btn btn-lg btn-primary">Annuler</button></a>
+                <button type="button" class="btn btn-lg btn-primary"><a href="{{ path('sorties_afficher') }}">Annuler</a></button>
             {% else %}
                 <button type="reset" class="btn btn-lg btn-primary">Annuler</button>
             {% endif %}
