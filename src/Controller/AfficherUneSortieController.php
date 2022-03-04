@@ -22,7 +22,7 @@ class AfficherUneSortieController extends AbstractController
         {
             throw $this->createNotFoundException('Cette sortie n existe pas...');
         }
-        return $this->render('afficher_une_sortie/afficherSortie.html.twig', [
+        return $this->render('sortie/afficherSortie.html.twig', [
             'sortie' => $sortie
         ]);
     }

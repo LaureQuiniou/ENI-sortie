@@ -59,7 +59,7 @@ class SortieController extends AbstractController
 
         $sorties=$sortieRepository->searchSortiesAvecFiltres($searchData, $user);
 
-        return $this->render('sortie/afficher.html.twig', [
+        return $this->render('pageAccueil/afficher.html.twig', [
             'searchForm' => $searchForm->createView(),
             "sorties"=>$sorties
         ]);
@@ -191,7 +191,7 @@ class SortieController extends AbstractController
         $sorties=$sortieRepository->searchSortiesAvecFiltres($searchData, $user);
 
         //on redirige
-        return $this->render('sortie/afficher.html.twig', [
+        return $this->render('pageAccueil/afficher.html.twig', [
             'searchForm' => $searchForm->createView(),
             "sorties"=>$sorties
         ]);
@@ -227,7 +227,7 @@ class SortieController extends AbstractController
         $sorties=$sortieRepository->searchSortiesAvecFiltres($searchData, $user);
 
         //on redirige
-        return $this->render('sortie/afficher.html.twig', [
+        return $this->render('pageAccueil/afficher.html.twig', [
             'searchForm' => $searchForm->createView(),
             "sorties"=>$sorties
         ]);

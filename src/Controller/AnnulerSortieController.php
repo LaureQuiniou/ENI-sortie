@@ -33,7 +33,7 @@ class AnnulerSortieController extends AbstractController
             return $this->redirectToRoute('sorties_afficher');
         }
 
-        return $this->render('annuler_sortie/annulerSortie.html.twig', [
+        return $this->render('sortie/annulerSortie.html.twig', [
             'sortieChoisie'=>$sortieChoisie,
             'annulationForm'=>$annulationForm->createView()
         ]);
