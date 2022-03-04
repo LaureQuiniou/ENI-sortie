@@ -6,6 +6,7 @@ use App\Repository\SortieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SortieRepository::class)
@@ -20,31 +21,39 @@ class Sortie
     private $id;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(min=5, max=50, maxMessage="Le titre da la sortie ne doit pas dépasser 50 caractères", minMessage="Le titre da la sortie doit avoir au moins 5 caractères ")
      * @ORM\Column(type="string", length=50)
      */
     private $nom;
 
     /**
+     *
+     * @Assert\GreaterThanOrEqual (propertyPath="dateLimiteInscription", message="La date de la sortie ne peut pas être antèrieure à la date limite d'inscription")
      * @ORM\Column(type="datetime")
      */
     private $dateHeureDebut;
 
     /**
+     *
      * @ORM\Column(type="time")
      */
     private $duree;
 
     /**
+     *
      * @ORM\Column(type="datetime")
      */
     private $dateLimiteInscription;
 
     /**
+     * @Assert\GreaterThanOrEqual(value="2", message="Le nombre minimum de participants est de 2")
      * @ORM\Column(type="integer")
      */
     private $nbInscriptionsMax;
 
     /**
+     * @Assert\Length(min=10, minMessage="La déscription de la sortie doit contenir au moins 10 caractères")
      * @ORM\Column(type="text")
      */
     private $infosSortie;
@@ -74,6 +83,8 @@ class Sortie
     private $organisateur;
 
     /**
+     * @Assert\NotBlank(message="Le motif d'annulation de la sorite est obligatoire")
+     * @Assert\Length(min=8, max=255, minMessage="Le motif doit contenir au moins 8 caratères", maxMessage="Le motif ne peut pas dépasser 255 charactères, merci")
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $motifAnnulation;

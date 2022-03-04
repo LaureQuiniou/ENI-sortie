@@ -27,7 +27,6 @@ export class FiltreVille {
         let url=(window.location.href).replace(/(modifierSortie\/){1}\d+/,"cree_une_sortie")
         document.querySelector('.form-ville').addEventListener('keyup', e => {
             e.preventDefault();
-            console.log(url)
             const data= '&ville='+ document.querySelector('.form-ville').value;
             this.loadVille(url, data);
         })
@@ -94,7 +93,6 @@ export class FiltreVille {
     }
 
     async loadVille(url, data) {
-        console.log(url + '?ajax=1' + data)
             const response = await fetch(url + '?ajax=1' + data  , {
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
