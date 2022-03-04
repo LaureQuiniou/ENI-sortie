@@ -61,11 +61,13 @@
                     <td> {{ s.participants|length}} / {{ s.nbInscriptionsMax }}</td>
                     <td>{{ s.etat.libelle }}</td>
                     <td>
+                        {% if not s.etat.libelle is same as("Création")  %}
                         {% for p in s.participants  %}
                             {% if p is same as(app.user) %}
                                  X
                             {% endif %}
                         {% endfor%}
+                        {% endif %}
                     </td>
                     <td><a href="{{ path('profil_participant', { id:s.organisateur.id })}}">{{s.organisateur.nom}} </a></td>
 
