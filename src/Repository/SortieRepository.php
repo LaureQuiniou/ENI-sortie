@@ -61,8 +61,7 @@ class SortieRepository extends ServiceEntityRepository
         if (!empty($searchData['motClef'])){
             $queryBuilder->andWhere('s.nom LIKE :motClef')
                 ->setParameter('motClef', '%'.$searchData['motClef'].'%');
-            //$query->where('MATCH_AGAINST(s.nom, s.infosSortie) AGAINST (:mots boolean)>0')
-             //   ->setParameter('mots', $mots);
+
         }
         //filtre par date de début
         if (!empty($searchData['dateDebut'])){
@@ -80,7 +79,7 @@ class SortieRepository extends ServiceEntityRepository
                ->setParameter('organisateurId', $user->getId());
         }
         //filtre si user est inscrit
-        if ($searchData['est_inscrit']){
+        if (!empty($searchData['est_inscrit'])){
             $queryBuilder->andWhere('p.id = :userId')
                ->setParameter('userId', $user->getId());
        }
