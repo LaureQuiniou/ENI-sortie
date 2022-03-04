@@ -24,6 +24,7 @@
                 <div class="row">
                     <h1 class="col-4"><a href="{{ path('sorties_afficher') }}"><img src="{{ asset('img/logo.png') }}" alt="Logo"></a>Sortir.com</h1>
                         <ul class="nav justify-content-end col">
+                            {% if app.user %}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ path('sorties_afficher') }}">Accueil</a>
                             </li>
@@ -35,7 +36,6 @@
                                     <a class="nav-link" href="{{ path('admin_gestionUtilisateurs') }}">Gestion des utilsateurs</a>
                                 </li>
                             {% endif %}
-                            {% if app.user %}
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
                                 </li>
