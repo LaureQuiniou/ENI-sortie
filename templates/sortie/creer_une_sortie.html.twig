@@ -30,7 +30,7 @@
 
                 <div class="add">
                     {{ form_label(sortieForm.lieu.nom) }}
-                    <a href="#" onclick="addLieu();"> <img src="{{ asset('img/addIcon.png') }}" alt="Ajouter" id="iconAdd"></a>
+                    <a href="#" class="addLieu"> <img src="{{ asset('img/addIcon.png') }}" alt="Ajouter" id="iconAdd"></a>
                 </div>
                 {{ form_widget(sortieForm.lieu.nom, {'attr':{'class': 'form-lieu',value: sortieEnCours.lieu.nom}}) }}
                     <div class="div-lieu">
