@@ -83,8 +83,7 @@ class Sortie
     private $organisateur;
 
     /**
-     * @Assert\NotBlank(message="Le motif d'annulation de la sorite est obligatoire")
-     * @Assert\Length(min=8, max=255, minMessage="Le motif doit contenir au moins 8 caratères", maxMessage="Le motif ne peut pas dépasser 255 charactères, merci")
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $motifAnnulation;
