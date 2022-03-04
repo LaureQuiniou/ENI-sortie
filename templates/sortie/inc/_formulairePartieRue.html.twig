@@ -1,13 +1,13 @@
 {{ form_label(sortieForm.lieu.rue) }}
-{{ form_widget(sortieForm.lieu.rue, {attr: {'readonly': true, value: sortieEnCours.lieu.rue }})  }}
+{{ form_widget(sortieForm.lieu.rue, {attr: {'readonly': true, value: sortieEnCours.lieu.rue, 'class':'addRue' }})  }}
 {{ form_errors(sortieForm.lieu.rue) }}
 
 <div>
     {{ form_label(sortieForm.lieu.latitude) }}
-    {{ form_widget(sortieForm.lieu.latitude,{attr: {'readonly': true, value: sortieEnCours.lieu.latitude}}) }}
+    {{ form_widget(sortieForm.lieu.latitude,{attr: {'readonly': true, value: sortieEnCours.lieu.latitude, 'class':'addlat'}}) }}
     {{ form_errors(sortieForm.lieu.latitude) }}
     {{ form_label(sortieForm.lieu.longitude) }}
-    {{ form_widget(sortieForm.lieu.longitude, {attr: {'readonly': true, value: sortieEnCours.lieu.longitude}}) }}
+    {{ form_widget(sortieForm.lieu.longitude, {attr: {'readonly': true, value: sortieEnCours.lieu.longitude, 'class':'addlong'}}) }}
     {{ form_errors(sortieForm.lieu.longitude) }}
 
 </div>

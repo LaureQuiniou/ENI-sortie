@@ -14,7 +14,6 @@ export class FiltreVille {
         }else {
             this.form = element.querySelector('.js-filter-villes');
             this.bindEvents();
-            this.addLieu();
         }
     }
 
@@ -53,6 +52,14 @@ export class FiltreVille {
             e.preventDefault();
             const data = '&lieu=' + document.querySelector('.form-lieu').value
             this.loadRue(url, data);
+        })
+
+        document.querySelector('.addLieu').addEventListener('click', e=>{
+            e.preventDefault();
+            console.log(document.querySelector('.addRue').getAttribute('readonly'))
+            document.querySelector('.addRue').removeAttribute('readonly')
+            document.querySelector('.addlong').removeAttribute('readonly')
+            document.querySelector('.addlat').removeAttribute('readonly')
         })
 
     }

@@ -123,9 +123,8 @@ class SortieController extends AbstractController
         //Traitement des données
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
             $villess= explode(' ',$sortieForm['lieu']['ville']->getdata());
-            $ville= $villeRepository->findBy(['nom'=>$villess[1]]);
-            $lieu = $lieuRepository->findOneBy(['ville'=>$ville,'nom'=>$sortieForm['lieu']['nom']->getdata()]);
-            dump($lieu);
+            $ville= $villeRepository->findOneBy(['nom'=>$villess[1]]);
+            //$lieu = $lieuRepository->findOneBy(['ville'=>$ville,'nom'=>$sortieForm['lieu']['nom']->getdata()]);
             $sortieEnCours->setCampus($this->getUser()->getCampus());
             $sortieEnCours->setOrganisateur($organisateur);
             if(!empty($request->request->get('publier') )){
@@ -136,6 +135,17 @@ class SortieController extends AbstractController
                 $etat = $etatRepository->findOneBy(['libelle' => 'Création']);
                 $sortieEnCours->setEtat($etat);
                 $this->addFlash('success', 'Votre sortie a bien été enregistrée !!');
+            }
+            //$sortieEnCours->setLieu($lieu);
+            if($lieuRepository->findOneBy(['ville'=>$ville,'nom'=>$sortieForm['lieu']['nom']->getdata()])!==null){
+                $lieu = $lieuRepository->findOneBy(['ville'=>$ville,'nom'=>$sortieForm['lieu']['nom']->getdata()]);
+            }else{
+                $lieu= new Lieu();
+                $lieu->setVille($ville);
+                $lieu->setNom($sortieForm['lieu']['nom']->getdata());
+                $lieu->setRue($sortieForm['lieu']['rue']->getdata());
+                $lieu->setLatitude($sortieForm['lieu']['latitude']->getdata());
+                $lieu->setLongitude($sortieForm['lieu']['longitude']->getdata());
             }
             $sortieEnCours->setLieu($lieu);
             $entityManager->persist($sortieEnCours);
